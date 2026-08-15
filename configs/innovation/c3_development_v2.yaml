@@ -1,0 +1,130 @@
+protocol_version: 2
+protocol_name: cross_examined_counterexample_certificates_target_blind_development_v2
+status: development_only_no_confirmatory_claim
+seed: 20260815
+output_root: outputs/bench_coe/innovation/cross_examined_certificates/dev_v2_20260815
+models_dir: models
+physical_gpus: [0, 1, 2, 3]
+
+data_policy:
+  labels_are_development_only: true
+  generation_reads_labels: false
+  consumed_locked_tests_excluded: [musr_test]
+  previously_observed_sets_may_only_be_used_for_development: true
+  statistical_unit: unique_question
+  checker_target_is_hidden: true
+  checker_commitment_source: stage0_base_prediction
+
+experts:
+  - Baichuan2-7B-Chat
+  - General-Reasoner-7B-preview
+  - Llama-3.1-8B-Instruct
+  - MAmmoTH2-8B-Plus
+  - Ministral-8B-Instruct-2410
+  - Nemotron-H-8B-Reasoning-128K
+  - Qwen2.5-7B-Instruct
+  - Yi-1.5-9B-Chat
+  - Yi-9B
+  - aya-expanse-8b
+  - gemma-2-9b-it
+  - glm-4-9b-chat
+  - granite-3.3-8b-instruct
+  - internlm3-8b-instruct
+
+certificate_models:
+  - Qwen2.5-7B-Instruct
+  - General-Reasoner-7B-preview
+  - Yi-1.5-9B-Chat
+  - Nemotron-H-8B-Reasoning-128K
+checker_models:
+  - Qwen2.5-7B-Instruct
+  - General-Reasoner-7B-preview
+  - Yi-1.5-9B-Chat
+  - Nemotron-H-8B-Reasoning-128K
+
+datasets:
+  - name: mmlu_pro_validation
+    dataset: mmlu_pro
+    split: validation
+    role: development
+    expected_questions: 70
+    cache_path: outputs/bench_coe/mmlu_pro_validation_single_models
+  - name: gpqa_diamond_epoch0
+    dataset: gpqa
+    split: diamond_epoch0
+    role: development
+    expected_questions: 198
+    label_cache_path: outputs/model_benchmarks/official_code_local_models/gpqa
+    observable_cache_path: outputs/bench_coe/innovation/sanitized_targets/prior_art_v2/gpqa_common14
+    reference_model: Qwen2.5-7B-Instruct
+    config: diamond
+    epoch: 0
+
+certificate_generation:
+  backend: vllm
+  prompt_version: two_sided_sealed_certificate_v2
+  parser_version: anchored_certificate_fields_v2
+  seed: 20260815
+  temperature: 0.0
+  top_p: 1.0
+  max_model_len: 4096
+  max_new_tokens: 384
+  guided_regex: true
+  batch_size: 32
+  gpu_memory_utilization: 0.82
+  dtype: auto
+  trust_remote_code: true
+
+check_generation:
+  backend: vllm
+  prompt_version: target_blind_effect_reconstruction_v2
+  parser_version: target_blind_effect_fields_v2
+  seed: 20260815
+  temperature: 0.0
+  top_p: 1.0
+  max_model_len: 4096
+  max_new_tokens: 256
+  guided_regex: true
+  batch_size: 32
+  gpu_memory_utilization: 0.82
+  dtype: auto
+  trust_remote_code: true
+
+smoke_acceptance:
+  minimum_certificate_parse_rate: 0.90
+  minimum_check_parse_rate: 0.90
+  maximum_prompt_truncations: 0
+  require_target_hidden: true
+  require_stage0_commitments: true
+
+outer_validation:
+  scheme: leave_one_environment_out
+  environment: dataset_plus_subject
+  nested_selection: true
+  selection_metric: macro_environment_accuracy_then_micro_accuracy
+  bootstrap_samples: 10000
+  bootstrap_seed: 20260815
+
+variant_grid:
+  regularization_c: [0.01, 0.1, 1.0, 10.0]
+  intervention_margin: [0.0, 0.05, 0.10, 0.15]
+  open_option_set: true
+  use_certificates: true
+  use_checks: true
+  use_generator_answer_dependence: true
+  use_checker_answer_dependence: true
+  use_generator_checker_pair_effects: true
+
+near_prior_baseline_grid:
+  static_base_prior_strength: [0.0, 0.5, 1.0, 2.0]
+  static_intervention_margin: [0.0, 0.05, 0.10, 0.15]
+  minority_veto_threshold: [1, 2, 3]
+
+acceptance:
+  minimum_oof_delta_vs_deployable_best_single_pp: 5.0
+  minimum_oof_delta_vs_full_development_best_single_pp: 0.0
+  minimum_per_dataset_delta_pp: 0.0
+  require_paired_bootstrap_ci_low_gt_zero: true
+  require_two_sided_mcnemar_p_lt: 0.05
+  require_full_ablation_and_cost_report: true
+  blind_test_authorized_only_after_all_development_gates_pass: true

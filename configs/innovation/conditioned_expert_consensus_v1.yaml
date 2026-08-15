@@ -1,0 +1,84 @@
+protocol_version: 1
+protocol_name: source_subject_conditioned_expert_consensus_v1
+protocol_seed: 20260814
+scope: source_trained_development_ood_diagnostic
+portfolio_config: configs/innovation/strict_positive_dataset_portfolios_v1.yaml
+test_receipt: outputs/bench_coe/innovation/receipts/conditioned_expert_consensus_v1_tests.json
+output_root: outputs/bench_coe/innovation/conditioned_expert_consensus/v1_20260814
+fcrg_method: fcrg_full
+datasets:
+  cmmmu_val:
+    source_config: configs/innovation/prior_art_overlap_source_loso_gpu0_3_v2.yaml
+    target_panel_config: configs/innovation/prior_art_overlap_multimodal_ood_gpu0_3_v2.yaml
+    base_method: smoothie_local_minilm
+    source_subject_groups:
+      Accounting: business
+      Agriculture: science
+      Architecture_and_Engineering: technology_engineering
+      Art: art_design
+      Art_Theory: art_design
+      Basic_Medical_Science: health_medicine
+      Biology: science
+      Chemistry: science
+      Clinical_Medicine: health_medicine
+      Computer_Science: technology_engineering
+      Design: art_design
+      Diagnostics_and_Laboratory_Medicine: health_medicine
+      Economics: business
+      Electronics: technology_engineering
+      Energy_and_Power: technology_engineering
+      Finance: business
+      Geography: science
+      History: humanities_social_science
+      Literature: humanities_social_science
+      Manage: business
+      Marketing: business
+      Materials: technology_engineering
+      Math: science
+      Mechanical_Engineering: technology_engineering
+      Music: art_design
+      Pharmacy: health_medicine
+      Physics: science
+      Psychology: humanities_social_science
+      Public_Health: health_medicine
+      Sociology: humanities_social_science
+    target_subject_groups:
+      技术与工程: technology_engineering
+      科学: science
+      健康与医学: health_medicine
+      商业: business
+      艺术与设计: art_design
+      人文社会科学: humanities_social_science
+  gpqa_cached_eval:
+    source_config: configs/innovation/prior_art_overlap_language_ood_gpu0_3_v2.yaml
+    target_panel_config: configs/innovation/prior_art_overlap_language_ood_gpu0_3_v2.yaml
+    base_method: more_style_minilm
+    source_subject_groups:
+      physics: physics
+      chemistry: chemistry
+      biology: biology
+      math: other
+      business: other
+      psychology: other
+      economics: other
+      health: other
+      engineering: other
+      law: other
+      history: other
+      philosophy: other
+      computer science: other
+      other: other
+    target_subject_groups:
+      Physics: physics
+      Chemistry: chemistry
+      Biology: biology
+candidate_grid:
+  prior_strengths: [0.0, 10.0, 50.0]
+  reliability_powers: [1.0, 2.0, 4.0]
+  uncertainty_temperatures: [0.0, 1.0]
+  family_balance: [false, true]
+  validity_powers: [0.0, 1.0]
+  fallback_shares: [0.0, 0.4, 0.5]
+  minimum_advantages: [0.0, 0.03, 0.075]
+acceptance:
+  minimum_delta_vs_fcrg: 0.01

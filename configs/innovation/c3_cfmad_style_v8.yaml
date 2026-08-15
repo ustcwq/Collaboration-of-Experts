@@ -1,0 +1,80 @@
+protocol_version: 1
+protocol_name: c3_cfmad_style_seeded_two_stance_four_backbone_v1
+status: development_only_no_confirmatory_claim
+seed: 20260815
+
+c3_config: configs/innovation/c3_development_v8.yaml
+c3_config_sha256: c00f14239f28a3e4ad795a92d7de90d0312a466be8add7448640a6e84eabcc19
+run_root: outputs/bench_coe/innovation/cross_examined_certificates/dev_v8_20260815
+physical_gpus: [0, 1, 2, 3]
+
+prior_art:
+  method: CFMAD
+  paper: Counterfactual Debating with Preset Stances for Hallucination Elimination of LLMs
+  venue: COLING 2025
+  url: https://aclanthology.org/2025.coling-main.703/
+  official_code: https://github.com/Peter-Fy/CFMAD/
+  exact_official_reproduction: false
+  adaptation_boundary: seeded_two_stance_multiple_choice_pipeline_replicated_over_four_frozen_local_backbones
+  retained_structure:
+    - three_cot_calls_select_first_stance
+    - one_seeded_remaining_option_selects_counterfactual_stance
+    - abduction_critic_rebuttal_for_each_stance
+    - third_party_style_final_judgement
+    - ten_calls_per_backbone_per_question
+  declared_differences:
+    - four_prefrozen_local_backbone_replicates_and_label_free_plurality_are_reported_in_addition_to_each_single_backbone
+    - counterfactual_random_choice_is_seeded_by_query_and_model_for_reproducibility
+    - outputs_use_strict_machine_parseable_fields_and_guided_decoding
+    - prompts_are_task_generic_for_mmlu_pro_and_gpqa
+    - no_claim_of_matching_the_papers_gpt_3_5_api_or_original_datasets
+
+models:
+  - Qwen2.5-7B-Instruct
+  - General-Reasoner-7B-preview
+  - Yi-1.5-9B-Chat
+  - Nemotron-H-8B-Reasoning-128K
+
+method:
+  cot_samples: 3
+  cot_aggregation: plurality_then_first_sample_then_option_order
+  preset_stances: 2
+  first_stance_selection: three_cot_plurality
+  second_stance_selection: seeded_uniform_from_remaining_options
+  debate_rounds: 1
+  same_backbone_for_all_roles: true
+  ensemble_aggregation: plurality_then_first_configured_model_then_option_order
+
+calls_per_model_per_question: 10
+ensemble_calls_per_question: 40
+
+generation:
+  backend: vllm
+  temperature: 0.0
+  top_p: 1.0
+  max_model_len: 4096
+  max_new_tokens: 160
+  guided_regex: true
+  batch_size: 32
+  gpu_memory_utilization: 0.82
+  dtype: auto
+  trust_remote_code: true
+
+acceptance:
+  minimum_cot_parse_rate: 0.90
+  minimum_debate_parse_rate: 0.90
+  minimum_judge_parse_rate: 0.90
+  maximum_prompt_truncations: 0
+  require_distinct_stance_pair_per_question: true
+  require_primary_strictly_beats_all_cfmad_style_methods: true
+
+data_policy:
+  generation_reads_labels: false
+  base_predictions_read: false
+  certificate_or_check_outputs_read: false
+  model_pool_equals_prefrozen_c3_generator_checker_pool: true
+  counterfactual_choice_is_seeded_and_label_free: true
+  development_accuracy_used_for_selection: false
+  target_labels_control_generation_or_aggregation: false
+  prediction_artifacts_frozen_before_evaluation: true
+  consumed_locked_tests_excluded: [musr_test]

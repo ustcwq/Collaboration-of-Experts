@@ -1,0 +1,102 @@
+protocol_version: 1
+seeds: [20260814, 20260815, 20260816, 20260817]
+run_physical_gpus: [0, 1, 2, 3]
+family_map: configs/innovation/expert_families.yaml
+dataset_registry: docs/innovation/experiment_manifest.yaml
+dataset_registry_sha256: 3cc1bf93adc5e7d0b7277447659317184377739d592c68b831dd5768b8cedb79
+test_receipt: outputs/bench_coe/innovation/receipts/repair_simplification_gpu0_3_v1_tests.json
+output_root: outputs/bench_coe/innovation/repair_simplification/source_loso_gpu0_3_v1_20260814
+knn_k: 32
+beta_grid: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+alpha_grid: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+tie_tolerance: 1.0e-12
+bootstrap_samples: 2000
+aggregate_bootstrap_seed: 20260814
+aggregate_bootstrap_samples: 10000
+expected_source_questions: 577
+expected_source_environments: 30
+simplification_gate:
+  required_micro_delta: 0.0
+  required_worst_environment_delta: -0.005
+  required_nonnegative_environment_fraction: 0.6666666666666666
+  ci_noninferiority_margin: 0.005
+pool_shift:
+  original_pool: pool4_original
+  replacement_pool: pool4_qwen_vl_swap
+  required_delta_vs_pool_m0: -0.005
+  pools:
+    pool4_original:
+      - InternVL3_5-2B
+      - LFM2.5-VL-1.6B
+      - Qwen3.5-2B
+      - gemma-4-E2B-it
+    pool4_qwen_vl_swap:
+      - InternVL3_5-2B
+      - LFM2.5-VL-1.6B
+      - Qwen3-VL-2B-Instruct
+      - gemma-4-E2B-it
+deterministic_methods:
+  - source_best_single
+  - majority_vote
+  - source_accuracy_weighted_vote
+  - family_balanced_vote
+  - output_profile_knn
+  - global_local_competence
+  - dare_reliability
+  - legacy_repair_chain
+  - m0_full
+  - m1_no_local
+  - m2_no_local_no_global
+  - m3_h1_support
+  - m3_cluster_h1_support
+  - m4_h1
+  - m4_cluster_mean_h1
+  - m4_h1_no_self
+  - m5_h1_h2
+  - m5_h1_h2_symmetric
+  - m5_h1_h2_no_self
+  - m5_h1_h2_centrality
+  - m6_support
+  - m7_local
+  - m8_global
+  - pool4_original__source_best_single
+  - pool4_original__m0_full
+  - pool4_original__m1_no_local
+  - pool4_original__m2_no_local_no_global
+  - pool4_original__m3_h1_support
+  - pool4_original__m3_cluster_h1_support
+  - pool4_original__m4_h1
+  - pool4_original__m4_cluster_mean_h1
+  - pool4_original__m5_h1_h2
+  - pool4_original__m6_support
+  - pool4_original__m7_local
+  - pool4_original__m8_global
+  - pool4_qwen_vl_swap__source_best_single
+  - pool4_qwen_vl_swap__m0_full
+  - pool4_qwen_vl_swap__m1_no_local
+  - pool4_qwen_vl_swap__m2_no_local_no_global
+  - pool4_qwen_vl_swap__m3_h1_support
+  - pool4_qwen_vl_swap__m3_cluster_h1_support
+  - pool4_qwen_vl_swap__m4_h1
+  - pool4_qwen_vl_swap__m4_cluster_mean_h1
+  - pool4_qwen_vl_swap__m5_h1_h2
+  - pool4_qwen_vl_swap__m6_support
+  - pool4_qwen_vl_swap__m7_local
+  - pool4_qwen_vl_swap__m8_global
+experts:
+  - InternVL3_5-2B
+  - Kimi-VL-A3B-Instruct
+  - LFM2.5-VL-1.6B
+  - MiniCPM-V-4.6
+  - Qwen3-VL-2B-Instruct
+  - Qwen3-VL-2B-Thinking
+  - Qwen3.5-2B
+  - SmolVLM2-2.2B-Base
+  - SmolVLM2-2.2B-Instruct
+  - gemma-4-E2B-it
+  - glm-edge-v-2b
+source:
+  dataset: mmmu_pro
+  split: validation_id
+  modality: multimodal
+  cache_path: outputs/multimodal_babyvision_models/mmmu_pro/standard_10_options/validation_id

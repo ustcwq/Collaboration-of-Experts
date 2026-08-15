@@ -1,0 +1,169 @@
+protocol_version: 9
+protocol_name: sealed_diagnostic_bijection_court_development_v9
+status: development_only_no_confirmatory_claim
+seed: 20260816
+input_observables_root: outputs/bench_coe/innovation/cross_examined_certificates/dev_v8_20260815
+output_root: outputs/bench_coe/innovation/sealed_diagnostic_bijection/dev_v9_20260816
+models_dir: models
+physical_gpus: [0, 1, 2, 3]
+
+input_hashes:
+  questions_sha256: 68736570f83f290779ff3afb9dfaa888e799c4664fd371a4a6f31cee0a399ae4
+  base_predictions_sha256: 86e21293002514e95d4b85133c2439af649a4bf81e5fb050bbf04499e53ac21d
+
+innovation_hypothesis:
+  name: sealed_diagnostic_bijection_court
+  claim_scope: joint_mechanism_only_subject_to_scoped_prior_art_search
+  question_decomposition_is_prior_art: true
+  independent_verification_questions_are_prior_art: true
+  information_asymmetric_atomic_checking_is_prior_art: true
+  blind_evaluation_is_prior_art: true
+  commit_reveal_and_post_commit_permutation_are_prior_art: true
+  source_cross_fitted_reliability_is_prior_art: true
+  candidate_joint_mechanism: author_committed_binary_diagnostic_and_hidden_outcome_candidate_bijection_with_post_commit_outcome_renaming_and_code_only_delayed_reveal
+  exact_joint_mechanism_found_in_scoped_search: false
+  global_novelty_claim_authorized: false
+
+data_policy:
+  development_datasets: [mmlu_pro_validation, gpqa_diamond_epoch0]
+  labels_are_development_only: true
+  generation_reads_labels: false
+  consumed_locked_tests_excluded: [musr_test]
+  previously_observed_sets_may_only_be_used_for_development: true
+  statistical_unit: unique_question
+  pair_assignment_reads_only_label_free_stage0_predictions: true
+  author_reads_original_task_and_assigned_pair: true
+  author_reads_only_own_private_stage0_trace: true
+  author_reads_other_private_responses: false
+  author_reads_votes_counts_popularity_or_model_identity: false
+  checker_reads_only_self_contained_probe_and_two_outcome_texts: true
+  checker_reads_original_task: false
+  checker_reads_candidate_pair_or_mapping: false
+  checker_reads_author_identity_private_trace_votes_or_labels: false
+  outcome_positions_are_permuted_after_author_commitment: true
+  raw_checker_outputs_are_written_and_hashed_before_mapping_reveal: true
+  target_labels_control_stopping_or_selection: false
+
+experts:
+  - Baichuan2-7B-Chat
+  - General-Reasoner-7B-preview
+  - Llama-3.1-8B-Instruct
+  - MAmmoTH2-8B-Plus
+  - Ministral-8B-Instruct-2410
+  - Nemotron-H-8B-Reasoning-128K
+  - Qwen2.5-7B-Instruct
+  - Yi-1.5-9B-Chat
+  - Yi-9B
+  - aya-expanse-8b
+  - gemma-2-9b-it
+  - glm-4-9b-chat
+  - granite-3.3-8b-instruct
+  - internlm3-8b-instruct
+
+author_models:
+  - Qwen2.5-7B-Instruct
+  - General-Reasoner-7B-preview
+  - Yi-1.5-9B-Chat
+  - Nemotron-H-8B-Reasoning-128K
+checker_models:
+  - Qwen2.5-7B-Instruct
+  - General-Reasoner-7B-preview
+  - Yi-1.5-9B-Chat
+  - Nemotron-H-8B-Reasoning-128K
+
+candidate_pair_assignment:
+  strategy: author_stage0_vs_coverage_ranked_challenger
+  deterministic: true
+  uses_gold: false
+  primary_is_author_stage0_when_valid: true
+  challenger_priority: repeated_edge_count_then_candidate_exposure_then_vote_rank
+  vote_rank_tie_break: first_frozen_expert_support_then_query_local_option_order
+
+probe_generation:
+  backend: vllm
+  prompt_version: sealed_binary_diagnostic_bijection_v9
+  parser_version: strict_diagnostic_bijection_fields_v9
+  seed: 20260816
+  temperature: 0.0
+  top_p: 1.0
+  max_model_len: 4096
+  max_new_tokens: 512
+  guided_regex: true
+  batch_size: 32
+  gpu_memory_utilization: 0.82
+  dtype: auto
+  trust_remote_code: true
+  post_commit_outcome_permutation: true
+
+check_generation:
+  backend: vllm
+  prompt_version: blind_binary_probe_resolution_v9
+  parser_version: strict_probe_outcome_fields_v9
+  seed: 20260816
+  temperature: 0.0
+  top_p: 1.0
+  max_model_len: 4096
+  max_new_tokens: 192
+  guided_regex: true
+  batch_size: 64
+  gpu_memory_utilization: 0.82
+  dtype: auto
+  trust_remote_code: true
+
+# Frozen before the first v9 model call. All rates are computed without gold labels.
+smoke_acceptance:
+  questions_per_author: 6
+  minimum_probe_parse_rate: 0.90
+  minimum_nonabstaining_probe_rate: 0.67
+  minimum_mapping_bijection_rate: 1.0
+  minimum_presented_side_fraction: 0.20
+  minimum_check_parse_rate: 0.90
+  minimum_decided_check_rate: 0.50
+  maximum_single_presented_side_selection_rate: 0.85
+  minimum_complete_cross_check_rate: 0.90
+  minimum_agreement_eligible_probe_rate: 0.50
+  minimum_cross_checker_pairwise_agreement_rate: 0.50
+  maximum_prompt_truncations: 0
+  require_all_registered_authors_and_checkers: true
+  require_two_development_datasets_per_author: true
+  require_raw_check_hash_before_reveal: true
+  require_original_task_candidate_pair_and_mapping_hidden: true
+
+outer_validation:
+  scheme: leave_one_environment_out
+  environment: dataset_plus_subject
+  nested_selection: true
+  selection_metric: macro_environment_accuracy_then_micro_accuracy
+  bootstrap_samples: 10000
+  bootstrap_seed: 20260816
+
+variant_grid:
+  regularization_c: [0.01, 0.1, 1.0, 10.0]
+  intervention_margin: [0.0, 0.05, 0.10, 0.15]
+  minimum_probe_confidence: [0, 60, 80]
+  use_author_identity: true
+  use_checker_identity: true
+  use_author_checker_interaction: true
+  use_checker_stage0_relation: true
+  open_option_set: true
+
+feature_ablations:
+  - no_author_identity
+  - no_checker_identity
+  - no_author_checker_interaction
+  - no_checker_stage0_relation
+  - no_diagnostic_evidence
+  - no_conservative_intervention_gate
+
+acceptance:
+  minimum_oof_delta_vs_deployable_best_single_pp: 5.0
+  minimum_oof_delta_vs_full_development_best_single_pp: 0.0
+  minimum_per_dataset_delta_pp: 0.0
+  require_paired_bootstrap_ci_low_gt_zero: true
+  require_two_sided_mcnemar_p_lt: 0.05
+  require_full_ablation_and_cost_report: true
+  require_cove_march_style_isolated_probe_control: true
+  require_mapping_visible_equal_call_control: true
+  require_direct_two_candidate_equal_call_control: true
+  require_equal_call_single_model_baselines: true
+  blind_test_authorized_only_after_all_development_gates_pass: true

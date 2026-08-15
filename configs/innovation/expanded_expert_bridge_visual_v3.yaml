@@ -1,0 +1,55 @@
+protocol_version: 1
+protocol_name: validation_selected_expanded_visual_expert_bridge_v3
+protocol_seed: 20260814
+scope: development_ood_expanded_expert_pool
+family_map: configs/innovation/expanded_expert_families_v3.yaml
+dataset_registry: docs/innovation/experiment_manifest_expanded_v3.yaml
+dataset_registry_sha256: 8274e539c1430de3ab708e53e857eaae9482018d53368566a95fdc7bc9ae7f7c
+portfolio_config: configs/innovation/strict_positive_dataset_portfolios_v1.yaml
+test_receipt: outputs/bench_coe/innovation/receipts/expanded_expert_bridge_visual_v3_tests.json
+bootstrap_samples: 10000
+experts:
+  - GLM-4.1V-9B-Thinking
+  - InternVL3_5-14B
+  - InternVL3_5-8B
+  - Llama-3.1-Nemotron-Nano-VL-8B-V1
+  - Phi-4-reasoning-vision-15B
+  - Qwen2.5-VL-7B-Instruct
+  - Qwen3-VL-8B-Thinking
+  - gemma-3-12b-it
+source_projection:
+  input_cache_path: outputs/bench_coe/scale_transfer_views_20260802/vision/mmmu_pro/standard_10_options/test
+  id_prefix: validation_
+  dataset: mmmu_pro
+  split: validation_id
+  modality: multimodal
+  expected_questions: 577
+source:
+  dataset: mmmu_pro
+  split: validation_id
+  modality: multimodal
+  cache_path: outputs/bench_coe/innovation/expanded_caches/v3_20260814/mmmu_pro_validation_id_expanded8
+  expected_questions: 577
+  projection_manifest: outputs/bench_coe/innovation/expanded_caches/v3_20260814/mmmu_pro_validation_id_expanded8/source_projection_manifest.json
+  projection_manifest_sha256: 3cf67098f9c665efc6aa96439e9d931764ca88f8fdf2fb6a1538971d32b2a392
+targets:
+  - name: cmmmu_val
+    dataset: cmmmu
+    split: val
+    modality: multimodal
+    label_cache_path: outputs/bench_coe/scale_transfer_views_20260802/vision/cmmmu/val
+    observable_cache_path: outputs/bench_coe/innovation/sanitized_targets/expanded_v3/cmmmu_val_expanded8
+    observable_manifest_sha256: f33ac798cc665e32b026507a60d19f96c27b7fcc0e05adbe4c3279b0c6186c9f
+    expected_questions: 900
+    v2_accuracy: 0.4088888888888889
+  - name: mathvista_testmini
+    dataset: mathvista
+    split: testmini
+    modality: multimodal
+    label_cache_path: outputs/bench_coe/scale_transfer_views_20260802/vision/mathvista/testmini
+    observable_cache_path: outputs/bench_coe/innovation/sanitized_targets/expanded_v3/mathvista_testmini_expanded8
+    observable_manifest_sha256: 31e858fcac51d0fce1b00dadabe5664b4a532b5fa902c6328417cb8412752375
+    expected_questions: 1000
+    v2_accuracy: 0.64
+acceptance:
+  minimum_delta_vs_fcrg: 0.02

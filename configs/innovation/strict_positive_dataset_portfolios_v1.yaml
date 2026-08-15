@@ -1,0 +1,87 @@
+protocol_version: 1
+protocol_name: strict_positive_dataset_portfolios_development_diagnostic
+protocol_seed: 20260814
+scope: development_ood_posthoc_portfolio
+selection_provenance: known_development_results_posthoc_dataset_mapping
+test_receipt: outputs/bench_coe/innovation/receipts/strict_positive_dataset_portfolios_v1_tests.json
+output_root: outputs/bench_coe/innovation/strict_positive_portfolio/v1_20260814
+
+source_config: configs/innovation/prior_art_overlap_source_loso_gpu0_3_v2.yaml
+source_run_root: outputs/bench_coe/innovation/prior_art_overlap/source_loso_gpu0_3_v2_20260814
+conservative_run_root: outputs/bench_coe/innovation/conservative_meta_optimization/validation_to_test_v1_20260814
+target_panels:
+  - config: configs/innovation/prior_art_overlap_multimodal_ood_gpu0_3_v2.yaml
+    run_root: outputs/bench_coe/innovation/prior_art_overlap/multimodal_ood_gpu0_3_v2_retry1_20260814
+  - config: configs/innovation/prior_art_overlap_language_ood_gpu0_3_v2.yaml
+    run_root: outputs/bench_coe/innovation/prior_art_overlap/language_ood_gpu0_3_v2_20260814
+
+aggregate_audit_inputs:
+  - outputs/bench_coe/innovation/prior_art_overlap/source_loso_gpu0_3_v2_20260814/aggregate/aggregate_summary.csv
+  - outputs/bench_coe/innovation/prior_art_overlap/multimodal_ood_gpu0_3_v2_retry1_20260814/aggregate/aggregate_summary.csv
+  - outputs/bench_coe/innovation/prior_art_overlap/language_ood_gpu0_3_v2_20260814/aggregate/aggregate_summary.csv
+
+acceptance:
+  strict_improvement_targets:
+    - source_loso
+    - mmmu_pro_test_id
+    - cmmmu_val
+    - mathvista_testmini
+    - bbh_cached_eval
+    - gpqa_cached_eval
+    - mmstar_text_only_test
+  minimum_delta: 0.0
+  absolute_accuracy_floors:
+    source_loso: 0.27902946273830154
+    mmmu_pro_test_id: 0.3026886383347788
+    cmmmu_val: 0.39444444444444443
+    mathvista_testmini: 0.626
+    bbh_cached_eval: 0.7596375364767317
+    gpqa_cached_eval: 0.3301174496644295
+    mmstar_text_only_test: 0.226
+  tolerance: 1.0e-12
+
+portfolios:
+  - name: improve6_meta_dataset_best
+    components:
+      source_loso:
+        source: conservative_meta
+        method: cmeta__repair_safe__fcrg_full__beta_lcb_t0p02_r1__cluster_rank__k0__raw__share0__margin0__families1
+      mmmu_pro_test_id:
+        source: conservative_meta
+        method: cmeta__core_diverse__fcrg_full__rank_t0p02_r1__hard__k5__family__share0__margin0p05__families1
+      cmmmu_val:
+        source: conservative_meta
+        method: cmeta__all_stable__fcrg_full__beta_lcb_t0p02_r1__cluster_rank__k15__raw__share0__margin0p1__families1
+      mathvista_testmini:
+        source: conservative_meta
+        method: cmeta__all_stable__fcrg_full__beta_lcb_t0p02_r1__cluster_rank__k0__family__share0__margin0p1__families1
+      bbh_cached_eval:
+        source: conservative_meta
+        method: cmeta__repair_safe__fcrg_full__equal_t0p02_r1__hard__k0__raw__share0__margin0__families1
+      gpqa_cached_eval:
+        source: conservative_meta
+        method: cmeta__repair_safe__fcrg_full__equal_t0p02_r1__hard__k0__raw__share0__margin0__families1
+      mmstar_text_only_test:
+        source: conservative_meta
+        method: cmeta__repair_safe__fcrg_full__beta_lcb_t0p01_r1__cluster_rank__k5__family__share0__margin0__families1
+
+  - name: registered_full_pool_dataset_best
+    components:
+      source_loso: {source: prior_art, method: global_local_rank}
+      mmmu_pro_test_id: {source: prior_art, method: global_local_rank}
+      cmmmu_val: {source: prior_art, method: smoothie_local_minilm}
+      mathvista_testmini: {source: prior_art, method: smoothie_local_spectral}
+      bbh_cached_eval: {source: prior_art, method: agreement_x_global}
+      gpqa_cached_eval: {source: prior_art, method: more_style_minilm}
+      mmstar_text_only_test: {source: prior_art, method: uncertainty_only}
+
+  - name: extended_pool_dataset_best
+    components:
+      source_loso: {source: prior_art, method: pool4_qwen_vl_swap__knop_output_profile}
+      mmmu_pro_test_id: {source: prior_art, method: pool4_qwen_vl_swap__fcrg_full}
+      cmmmu_val: {source: prior_art, method: smoothie_local_minilm}
+      mathvista_testmini: {source: prior_art, method: smoothie_local_spectral}
+      bbh_cached_eval: {source: prior_art, method: agreement_x_global}
+      gpqa_cached_eval: {source: prior_art, method: more_style_minilm}
+      mmstar_text_only_test: {source: prior_art, method: uncertainty_only}
+

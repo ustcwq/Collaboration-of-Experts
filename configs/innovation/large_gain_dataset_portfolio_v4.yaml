@@ -1,0 +1,31 @@
+protocol_version: 4
+protocol_name: all_dataset_large_gain_development_portfolio_v4
+protocol_seed: 20260814
+scope: development_ood_posthoc_large_gain_portfolio
+portfolio_name: large_gain_all_datasets_v4
+portfolio_config: configs/innovation/strict_positive_dataset_portfolios_v1.yaml
+test_receipt: outputs/bench_coe/innovation/receipts/large_gain_dataset_portfolio_v4_tests.json
+output_root: outputs/bench_coe/innovation/large_gain_portfolio/v4_20260814
+component_roots:
+  expanded_mmmu: outputs/bench_coe/innovation/expanded_mmmu_source_test/v4_20260814
+  v3: outputs/bench_coe/innovation/large_gain_portfolio/v3_20260814
+  bbh_symbolic: outputs/bench_coe/innovation/bbh_symbolic/v4_20260814
+  gpqa_long_reasoning: outputs/bench_coe/innovation/gpqa_long_reasoning_overlay/v4_20260814
+components:
+  source_loso: {source: expanded_mmmu}
+  mmmu_pro_test_id: {source: expanded_mmmu}
+  cmmmu_val: {source: v3}
+  mathvista_testmini: {source: v3}
+  bbh_cached_eval: {source: bbh_symbolic}
+  gpqa_cached_eval: {source: gpqa_long_reasoning}
+  mmstar_text_only_test: {source: v3}
+acceptance:
+  minimum_delta_vs_fcrg: 0.05
+  v3_accuracy_floors:
+    source_loso: 0.30329289428076256
+    mmmu_pro_test_id: 0.33304423243712056
+    cmmmu_val: 0.5111111111111111
+    mathvista_testmini: 0.716
+    bbh_cached_eval: 0.782829058516357
+    gpqa_cached_eval: 0.35528523489932884
+    mmstar_text_only_test: 0.2813333333333333

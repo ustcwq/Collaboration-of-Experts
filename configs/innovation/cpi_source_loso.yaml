@@ -1,0 +1,43 @@
+base_seed: 20260808
+seeds: [20260808, 20260809, 20260810, 20260811]
+family_map: configs/innovation/expert_families.yaml
+dataset_registry: docs/innovation/experiment_manifest.yaml
+dataset_registry_sha256: 3cc1bf93adc5e7d0b7277447659317184377739d592c68b831dd5768b8cedb79
+output_root: outputs/bench_coe/innovation/cpi_selector/source_loso_remediation_v5_20260808
+test_receipt: outputs/bench_coe/innovation/receipts/remediation_v5_tests.json
+epochs: 24
+ablation_epochs: 20
+overfit_epochs: 80
+batch_size: 128
+learning_rate: 0.003
+hidden_dim: 48
+fingerprint_rank: 4
+bootstrap_samples: 1000
+clone_tolerance: 0.0001
+expected_source_questions: 577
+expected_source_environments: 30
+fixed_validation_stride: 5
+pool_sizes: [3, 5, 7, 9, 11]
+experts:
+  - InternVL3_5-2B
+  - Kimi-VL-A3B-Instruct
+  - LFM2.5-VL-1.6B
+  - MiniCPM-V-4.6
+  - Qwen3-VL-2B-Instruct
+  - Qwen3-VL-2B-Thinking
+  - Qwen3.5-2B
+  - SmolVLM2-2.2B-Base
+  - SmolVLM2-2.2B-Instruct
+  - gemma-4-E2B-it
+  - glm-edge-v-2b
+replacement_experts:
+  - Qwen3-VL-4B-Instruct
+  - Qwen3.5-9B
+known_swaps:
+  Qwen3-VL-2B-Instruct: Qwen3-VL-4B-Instruct
+  Qwen3.5-2B: Qwen3.5-9B
+source:
+  dataset: mmmu_pro
+  split: validation_id
+  modality: multimodal
+  cache_path: outputs/multimodal_babyvision_models/mmmu_pro/standard_10_options/validation_id

@@ -1,0 +1,57 @@
+protocol_version: 1.4
+frozen_at: "2026-08-09"
+status: blocked_no_passing_innovation_and_no_locked_test
+workspace_git_commit: UNKNOWN_NOT_A_GIT_WORK_TREE
+python: 3.12.11
+pytorch: 2.8.0+cu128
+cuda_runtime: "12.8"
+decision:
+  dcrg: NO-GO
+  cpi_selector: NO-GO
+  conservative_cpi: NO-GO
+  cpi_ce: NO-GO
+  cpi_remaining_source_factorial: NO-GO
+  topomix: NOT_FEASIBLE
+  repair_probe: NOT_AUTHORIZED
+  sequential: NOT_AUTHORIZED
+final_method: null
+conservative_deployment_baseline: source_best_single
+seeds: [20260808, 20260809, 20260810, 20260811]
+locked_target_datasets: []
+excluded_development_ood:
+  - mmmu_pro/test_id
+  - mathvista/testmini
+  - cmmmu/val
+  - bbh/cached_eval
+  - gpqa/cached_eval
+  - mmstar_text_only/test
+statistical_tests:
+  - crossed_seed_shared_query_bootstrap_10000
+  - exact_mcnemar
+  - holm_familywise_correction
+stopping_rules:
+  - do_not_run_final_without_a_genuinely_untouched_locked_dataset
+  - do_not_promote_dcrg_or_cpi_after_source_no_go
+  - do_not_promote_conservative_cpi_after_source_no_go
+  - do_not_promote_cpi_ce_after_source_no_go
+  - do_not_promote_remaining_factorial_after_source_no_go
+expected_output_path: outputs/bench_coe/innovation/final
+hashes:
+  cpi_config_sha256: 67f545a22b84090b80ccc38f6817752c00f8b9aa57a767eecea04fce1fa06b5c
+  dcrg_config_sha256: 64f0ec0283fc5b860a11ed8d7018bb7b5a18e32691c9e10d81de89e9c055b2af
+  test_receipt_sha256: 0d688f25384ca4247cb0e6ff2e932de98f31ccfdb02345a46b25363d5c03f790
+  experiment_manifest_sha256: 3cc1bf93adc5e7d0b7277447659317184377739d592c68b831dd5768b8cedb79
+  sanitized_mathvista_manifest_sha256: f8ca7374597dd3019c32a6c6a84aab8c59b4a5e7a5b65c689cea30195f6990ce
+  cpi_gate_sha256: 114225820ba5e7aa86f8d32030edb53a2d829a47459f2e7ed699225cfd0696df
+  dcrg_gate_sha256: 621d8901691aa6bc2bdf062527117b5cb9c40bfaf9c4e6c5d6bb49546546129e
+  conservative_cpi_config_sha256: c4ecb93c970240f717aae4e07857a1f27ee054ec2c4cc64eb544b5b772f6bd2a
+  conservative_cpi_test_receipt_sha256: 89ef492928b2830b75bbf16355dc5fe86f0d0bf443aaadf9b86ea9d19a0b53c0
+  conservative_cpi_gate_sha256: 071bb3c0939723bd990e7d2aa21ccd9adf998ee7322ce5bac2785a3413e3d274
+  cpi_ce_config_sha256: 33d7d7622bede21de92069420845aebef087900cae508d70b119c7cfd8615774
+  cpi_ce_protocol_sha256: 90061c5299aec1ede494d42a1dec304646baa568968a72e3386192c17a8bde10
+  cpi_ce_test_receipt_sha256: 7bfb9355f25c55686be03bc25f85c047f3f7c2c3050a0d1b29af226640483da8
+  cpi_ce_gate_sha256: 3efafb034e3ee38c3017659859249fe1c90dfb30be0acb265f597b92cbd11565
+  cpi_remaining_protocol_sha256: 63f2c920c9904dd4a2089b350e8f41416e72a9d942197d706a453274be534cc7
+  cpi_remaining_config_sha256: 79211aac928017a7b49020d0e3c68f758a2a0fee867af158a679341ccf508ca8
+  cpi_remaining_test_receipt_sha256: 8830e72c34a8766e2ca4adfe281106c79da65d85e33bf6cb45494212773df611
+  cpi_remaining_gate_sha256: a09d68168893fae49fd63c7cba8580d53d7181ae67b8d26d38a9a80d1e7308b9

@@ -1,0 +1,31 @@
+protocol_version: 1
+protocol_name: gpqa_source_best_long_reasoning_v4
+protocol_seed: 20260814
+scope: label_free_development_ood_inference
+test_receipt: outputs/bench_coe/innovation/receipts/gpqa_long_reasoning_v4_tests.json
+model_path: models/DeepSeek-R1-0528-Qwen3-8B
+source_selection:
+  dataset: mmlu_pro
+  split: validation
+  summary_root: outputs/bench_coe/mmlu_pro_validation_single_models
+  selected_model: DeepSeek-R1-0528-Qwen3-8B
+  selected_source_accuracy: 0.7428571428571429
+  selected_summary_sha256: 24da09fafaf8329d206c8f3c9cf41db2fa572598e9a697c3a260eec4f02804ea
+target_observables:
+  dataset: gpqa
+  split: cached_eval
+  cache_path: outputs/bench_coe/innovation/sanitized_targets/permutation_v1/gpqa_common14
+  observable_manifest_sha256: d9e0b4ac157c0c200a5275abb1743937cbadca0ef6c728dd69b6f2f0ab4cd6fc
+  metadata_expert_id: Baichuan2-7B-Chat
+  expected_questions: 4768
+  expected_epoch0_questions: 1192
+generation:
+  shard_count: 4
+  max_model_len: 6144
+  max_new_tokens: 4096
+  reasoning_token_budget: 3500
+  batch_size: 4
+  gpu_memory_utilization: 0.88
+  dtype: auto
+  enforce_eager: true
+output_root: outputs/bench_coe/innovation/gpqa_long_reasoning/v4_20260814

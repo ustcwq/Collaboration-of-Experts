@@ -1,0 +1,41 @@
+protocol_version: 1
+protocol_name: bbh_exact_symbolic_overlay_v4
+protocol_seed: 20260814
+scope: development_ood_label_free_exact_solver
+family_map: configs/innovation/expert_families.yaml
+dataset_registry: docs/innovation/experiment_manifest.yaml
+dataset_registry_sha256: 3cc1bf93adc5e7d0b7277447659317184377739d592c68b831dd5768b8cedb79
+portfolio_config: configs/innovation/strict_positive_dataset_portfolios_v1.yaml
+test_receipt: outputs/bench_coe/innovation/receipts/large_gain_v4_stage1_tests_v2.json
+v3_run_root: outputs/bench_coe/innovation/large_gain_portfolio/v3_20260814
+output_root: outputs/bench_coe/innovation/bbh_symbolic/v4_20260814
+bootstrap_samples: 10000
+experts:
+  - Baichuan2-7B-Chat
+  - General-Reasoner-7B-preview
+  - Llama-3.1-8B-Instruct
+  - MAmmoTH2-8B-Plus
+  - Ministral-8B-Instruct-2410
+  - Nemotron-H-8B-Reasoning-128K
+  - Qwen2.5-7B-Instruct
+  - Yi-1.5-9B-Chat
+  - Yi-9B
+  - aya-expanse-8b
+  - gemma-2-9b-it
+  - glm-4-9b-chat
+  - granite-3.3-8b-instruct
+  - internlm3-8b-instruct
+target_labels:
+  name: bbh_cached_eval
+  dataset: bbh
+  split: cached_eval
+  modality: language
+  cache_path: outputs/model_benchmarks/official_code_local_models/bbh
+  expected_questions: 6511
+  label_expert_id: Baichuan2-7B-Chat
+target_observables:
+  cache_path: outputs/bench_coe/innovation/sanitized_targets/v4_20260814/bbh_common14_with_input
+  observable_manifest_sha256: b6445d3f4a1efa4c2daedaa31ee5064857e4f554d0748c5160acc9da778cc454
+acceptance:
+  minimum_delta_vs_fcrg: 0.05
+  v3_accuracy_floor: 0.782829058516357

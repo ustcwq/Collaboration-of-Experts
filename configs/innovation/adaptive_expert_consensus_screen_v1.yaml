@@ -1,0 +1,141 @@
+protocol_version: 1
+protocol_name: source_oof_adaptive_expert_consensus_screen_v1
+protocol_seed: 20260814
+scope: source_oof_selected_development_ood_diagnostic
+portfolio_config: configs/innovation/strict_positive_dataset_portfolios_v1.yaml
+v2_run_root: outputs/bench_coe/innovation/large_gain_portfolio/v2_20260814
+test_receipt: outputs/bench_coe/innovation/receipts/adaptive_expert_consensus_screen_v1_fix1_tests.json
+output_root: outputs/bench_coe/innovation/adaptive_expert_consensus/screen_v1_fix1_20260814
+fcrg_method: fcrg_full
+source_oof_folds: 5
+source_selection_metrics:
+  - accuracy
+  - balanced_environment_accuracy
+  - worst_environment_delta
+top_per_source_metric: 8
+maximum_target_candidates: 24
+datasets:
+  cmmmu_val:
+    source_job: source_loso
+    source_config: configs/innovation/prior_art_overlap_source_loso_gpu0_3_v2.yaml
+    target_panel_config: configs/innovation/prior_art_overlap_multimodal_ood_gpu0_3_v2.yaml
+    source_reference_method: smoothie_local_minilm
+    source_subject_groups:
+      Accounting: business
+      Agriculture: science
+      Architecture_and_Engineering: technology_engineering
+      Art: art_design
+      Art_Theory: art_design
+      Basic_Medical_Science: health_medicine
+      Biology: science
+      Chemistry: science
+      Clinical_Medicine: health_medicine
+      Computer_Science: technology_engineering
+      Design: art_design
+      Diagnostics_and_Laboratory_Medicine: health_medicine
+      Economics: business
+      Electronics: technology_engineering
+      Energy_and_Power: technology_engineering
+      Finance: business
+      Geography: science
+      History: humanities_social_science
+      Literature: humanities_social_science
+      Manage: business
+      Marketing: business
+      Materials: technology_engineering
+      Math: science
+      Mechanical_Engineering: technology_engineering
+      Music: art_design
+      Pharmacy: health_medicine
+      Physics: science
+      Psychology: humanities_social_science
+      Public_Health: health_medicine
+      Sociology: humanities_social_science
+    target_subject_groups:
+      技术与工程: technology_engineering
+      科学: science
+      健康与医学: health_medicine
+      商业: business
+      艺术与设计: art_design
+      人文社会科学: humanities_social_science
+  mathvista_testmini:
+    source_job: source_loso
+    source_config: configs/innovation/prior_art_overlap_source_loso_gpu0_3_v2.yaml
+    target_panel_config: configs/innovation/prior_art_overlap_multimodal_ood_gpu0_3_v2.yaml
+    source_reference_method: smoothie_local_spectral
+    source_subject_groups:
+      Accounting: general-vqa
+      Agriculture: general-vqa
+      Architecture_and_Engineering: math-targeted-vqa
+      Art: general-vqa
+      Art_Theory: general-vqa
+      Basic_Medical_Science: general-vqa
+      Biology: math-targeted-vqa
+      Chemistry: math-targeted-vqa
+      Clinical_Medicine: general-vqa
+      Computer_Science: math-targeted-vqa
+      Design: general-vqa
+      Diagnostics_and_Laboratory_Medicine: general-vqa
+      Economics: general-vqa
+      Electronics: math-targeted-vqa
+      Energy_and_Power: math-targeted-vqa
+      Finance: general-vqa
+      Geography: general-vqa
+      History: general-vqa
+      Literature: general-vqa
+      Manage: general-vqa
+      Marketing: general-vqa
+      Materials: math-targeted-vqa
+      Math: math-targeted-vqa
+      Mechanical_Engineering: math-targeted-vqa
+      Music: general-vqa
+      Pharmacy: general-vqa
+      Physics: math-targeted-vqa
+      Psychology: general-vqa
+      Public_Health: general-vqa
+      Sociology: general-vqa
+    target_subject_groups:
+      general-vqa: general-vqa
+      math-targeted-vqa: math-targeted-vqa
+  gpqa_cached_eval:
+    source_job: source_loso
+    source_config: configs/innovation/prior_art_overlap_language_ood_gpu0_3_v2.yaml
+    target_panel_config: configs/innovation/prior_art_overlap_language_ood_gpu0_3_v2.yaml
+    source_reference_method: observable_majority
+    source_subject_groups:
+      physics: physics
+      chemistry: chemistry
+      biology: biology
+      math: other
+      business: other
+      psychology: other
+      economics: other
+      health: other
+      engineering: other
+      law: other
+      history: other
+      philosophy: other
+      computer science: other
+      other: other
+    target_subject_groups:
+      Physics: physics
+      Chemistry: chemistry
+      Biology: biology
+candidate_grid:
+  aggregations: [sum, noisy_or, dawid_skene]
+  prior_strengths: [25.0, 75.0]
+  reliability_powers: [1.0, 2.0, 4.0]
+  uncertainty_temperatures: [0.0, 0.5]
+  validity_powers: [0.0, 1.0]
+  support_powers: [0.0, 1.0]
+  family_balance: [false]
+  em_mixes: [0.0, 0.25]
+  em_iterations: 2
+  gates:
+    - {share: 0.0, advantage: 0.0}
+    - {share: 0.0, advantage: 0.04}
+    - {share: 0.0, advantage: 0.08}
+    - {share: 0.45, advantage: 0.04}
+    - {share: 0.55, advantage: 0.04}
+acceptance:
+  minimum_delta_vs_fcrg: 0.02

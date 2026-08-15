@@ -1,0 +1,50 @@
+version: 1
+generated_at: "2026-08-14"
+status: audited_development_only
+notes:
+  - "Expanded VLM source/test transfer; all targets are known development diagnostics, not blind tests."
+datasets:
+  - dataset: mmmu_pro
+    split: validation_id
+    modality: multimodal
+    source_or_target: source
+    development_or_locked_test: development_source
+    expert_pool: multimodal_expanded_8
+    cache_path: outputs/bench_coe/innovation/expanded_caches/v3_20260814/mmmu_pro_validation_id_expanded8
+    label_path: embedded_answer_and_is_correct_in_prediction_cache
+    judge: exact_match_dataset_evaluator
+    answer_type: multiple_choice_A_to_J
+    sample_count: 577
+  - dataset: mmmu_pro
+    split: test_id
+    modality: multimodal
+    source_or_target: target
+    development_or_locked_test: development_ood
+    expert_pool: multimodal_expanded_8
+    cache_path: outputs/bench_coe/innovation/expanded_caches/v4_20260814/mmmu_pro_test_id_expanded8
+    label_path: embedded_answer_and_is_correct_in_prediction_cache
+    judge: exact_match_dataset_evaluator
+    answer_type: multiple_choice_A_to_J
+    sample_count: 1153
+  - dataset: cmmmu
+    split: val
+    modality: multimodal
+    source_or_target: target
+    development_or_locked_test: development_ood
+    expert_pool: multimodal_expanded_8
+    cache_path: outputs/bench_coe/scale_transfer_views_20260802/vision/cmmmu/val
+    label_path: embedded_answer_and_is_correct_in_prediction_cache
+    judge: exact_match_dataset_evaluator
+    answer_type: mixed_choice
+    sample_count: 900
+  - dataset: mathvista
+    split: testmini
+    modality: multimodal
+    source_or_target: target
+    development_or_locked_test: development_ood
+    expert_pool: multimodal_expanded_8
+    cache_path: outputs/bench_coe/scale_transfer_views_20260802/vision/mathvista/testmini
+    label_path: embedded_answer_and_is_correct_in_prediction_cache
+    judge: dataset_specific_exact_numeric_or_choice
+    answer_type: mixed_numeric_and_multiple_choice
+    sample_count: 1000

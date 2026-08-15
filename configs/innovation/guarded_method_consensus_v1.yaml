@@ -1,0 +1,19 @@
+protocol_version: 1
+protocol_name: guarded_method_consensus_v1_component_refinement
+protocol_seed: 20260814
+scope: development_ood_posthoc_component_refinement
+portfolio_config: configs/innovation/strict_positive_dataset_portfolios_v1.yaml
+test_receipt: outputs/bench_coe/innovation/receipts/guarded_method_consensus_v1_tests.json
+output_root: outputs/bench_coe/innovation/guarded_method_consensus/v1_20260814
+base_methods:
+  cmmmu_val: smoothie_local_minilm
+  gpqa_cached_eval: more_style_minilm
+fcrg_method: fcrg_full
+expected_full_pool_methods: 57
+candidate_grid:
+  subsets: [all, core, nonstochastic, core_fcrg]
+  global_weightings: [equal, signature, family, agreement, signature_agreement]
+  fallback_shares: [0.0, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.6]
+  minimum_advantages: [0.0, 0.005, 0.01, 0.02, 0.03, 0.05, 0.075, 0.1]
+acceptance:
+  minimum_delta_vs_fcrg: 0.01

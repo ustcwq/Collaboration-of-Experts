@@ -1,0 +1,187 @@
+protocol_version: 8
+protocol_name: c3_commitment_conditioned_proof_audit_development_v8
+status: development_only_no_confirmatory_claim
+seed: 20260815
+output_root: outputs/bench_coe/innovation/cross_examined_certificates/dev_v8_20260815
+models_dir: models
+physical_gpus: [0, 1, 2, 3]
+
+innovation_hypothesis:
+  name: commitment_conditioned_countertest_court
+  claim_scope: joint_mechanism_only_subject_to_scoped_prior_art_search
+  components_individually_may_have_prior_art: true
+  pointwise_then_pairwise_evaluation_is_prior_art: true
+  private_precommitment_is_prior_art: true
+  proof_obligations_and_programmatic_comparison_are_prior_art: true
+  contrastive_valid_invalid_pairs_are_prior_art: true
+  commit_reveal_and_post_commit_permutation_are_prior_art: true
+  exact_joint_mechanism_found_in_scoped_search: false
+  global_novelty_claim_authorized: false
+
+data_policy:
+  labels_are_development_only: true
+  generation_reads_labels: false
+  consumed_locked_tests_excluded: [musr_test]
+  previously_observed_sets_may_only_be_used_for_development: true
+  statistical_unit: unique_question
+  generator_reads_only_own_private_stage0_response: true
+  generator_reads_other_model_outputs: false
+  generator_reads_votes_or_popularity: false
+  externally_assigned_generator_target_is_absent: true
+  author_commits_before_trace_permutation: true
+  trace_permutation_is_deterministic_and_label_free: true
+  generator_effect_claim_is_sealed: true
+  checker_reads_only_own_private_stage0_response: true
+  checker_private_response_is_untrusted_reasoning_not_evidence: true
+  checker_generator_identity_is_hidden: true
+  checker_effect_claim_is_hidden: true
+  checker_valid_trace_claim_is_hidden: true
+  checker_sibling_trace_is_hidden: true
+  checker_pair_existence_is_hidden: true
+  checker_first_difference_is_hidden: true
+  checker_commitment_source: stage0_base_prediction
+  checker_views: [trace_1, trace_2]
+  checker_requires_concrete_countertest: true
+  checker_requires_recomputation: true
+  checker_requires_commitment_relation: true
+  pair_is_combined_only_after_both_outputs_are_frozen: true
+  target_labels_control_stopping_or_selection: false
+
+experts:
+  - Baichuan2-7B-Chat
+  - General-Reasoner-7B-preview
+  - Llama-3.1-8B-Instruct
+  - MAmmoTH2-8B-Plus
+  - Ministral-8B-Instruct-2410
+  - Nemotron-H-8B-Reasoning-128K
+  - Qwen2.5-7B-Instruct
+  - Yi-1.5-9B-Chat
+  - Yi-9B
+  - aya-expanse-8b
+  - gemma-2-9b-it
+  - glm-4-9b-chat
+  - granite-3.3-8b-instruct
+  - internlm3-8b-instruct
+
+# Unchanged from v2-v7 and frozen before any v8 output.
+certificate_models:
+  - Qwen2.5-7B-Instruct
+  - General-Reasoner-7B-preview
+  - Yi-1.5-9B-Chat
+  - Nemotron-H-8B-Reasoning-128K
+checker_models:
+  - Qwen2.5-7B-Instruct
+  - General-Reasoner-7B-preview
+  - Yi-1.5-9B-Chat
+  - Nemotron-H-8B-Reasoning-128K
+
+datasets:
+  - name: mmlu_pro_validation
+    dataset: mmlu_pro
+    split: validation
+    role: development
+    expected_questions: 70
+    cache_path: outputs/bench_coe/mmlu_pro_validation_single_models
+  - name: gpqa_diamond_epoch0
+    dataset: gpqa
+    split: diamond_epoch0
+    role: development
+    expected_questions: 198
+    label_cache_path: outputs/model_benchmarks/official_code_local_models/gpqa
+    observable_cache_path: outputs/bench_coe/innovation/sanitized_targets/prior_art_v2/gpqa_common14
+    reference_model: Qwen2.5-7B-Instruct
+    config: diamond
+    epoch: 0
+
+# Reuse the v6 author protocol unchanged; only the checker scientific object changes.
+certificate_generation:
+  backend: vllm
+  prompt_version: committed_counterfactual_permutation_v6
+  parser_version: committed_counterfactual_challenge_fields_v6
+  seed: 20260815
+  temperature: 0.0
+  top_p: 1.0
+  max_model_len: 4096
+  max_new_tokens: 512
+  guided_regex: true
+  guided_seal_is_complete_claim_or_complete_abstention: true
+  batch_size: 32
+  gpu_memory_utilization: 0.82
+  dtype: auto
+  trust_remote_code: true
+  bounded_smoke_balances_presented_trace_slots: true
+
+check_generation:
+  backend: vllm
+  prompt_version: commitment_conditioned_proof_audit_v8
+  parser_version: proof_obligation_audit_fields_v8
+  seed: 20260815
+  temperature: 0.0
+  top_p: 1.0
+  max_model_len: 4096
+  max_new_tokens: 256
+  guided_regex: true
+  batch_size: 32
+  gpu_memory_utilization: 0.82
+  dtype: auto
+  trust_remote_code: true
+
+# Frozen before the first v8 model call and enforced per generator/checker.
+smoke_acceptance:
+  minimum_witness_parse_rate: 0.90
+  minimum_nonabstaining_witness_rate: 0.50
+  minimum_reconstruction_parse_rate: 0.90
+  minimum_complete_isolated_trace_pair_rate: 0.80
+  minimum_one_valid_one_invalid_pair_rate: 0.20
+  minimum_isolated_sealed_triple_match_rate: 0.10
+  maximum_prompt_truncations: 0
+  maximum_all_option_effect_rate: 0.0
+  require_candidate_neutral_generator: true
+  require_private_stage0_trace: true
+  require_sealed_claim: true
+  require_post_commit_permutation: true
+  require_stage0_commitments: true
+  require_checker_private_stage0_response: true
+  require_countertest: true
+  require_recomputation: true
+  require_commitment_relation: true
+  require_both_isolated_trace_views: true
+  require_sibling_trace_hidden: true
+  require_pair_existence_hidden: true
+  require_both_presented_trace_slots_in_bounded_smoke: true
+
+outer_validation:
+  scheme: leave_one_environment_out
+  environment: dataset_plus_subject
+  nested_selection: true
+  selection_metric: macro_environment_accuracy_then_micro_accuracy
+  bootstrap_samples: 10000
+  bootstrap_seed: 20260815
+
+variant_grid:
+  regularization_c: [0.01, 0.1, 1.0, 10.0]
+  intervention_margin: [0.0, 0.05, 0.10, 0.15]
+  open_option_set: true
+  use_certificates: true
+  use_checks: true
+  use_generator_answer_dependence: true
+  use_checker_answer_dependence: true
+  use_generator_checker_pair_effects: true
+  use_sealed_set_agreement: true
+  use_counterfactual_parity: true
+
+near_prior_baseline_grid:
+  static_base_prior_strength: [0.0, 0.5, 1.0, 2.0]
+  static_intervention_margin: [0.0, 0.05, 0.10, 0.15]
+  minority_veto_threshold: [1, 2, 3]
+
+acceptance:
+  minimum_oof_delta_vs_deployable_best_single_pp: 5.0
+  minimum_oof_delta_vs_full_development_best_single_pp: 0.0
+  minimum_per_dataset_delta_pp: 0.0
+  require_paired_bootstrap_ci_low_gt_zero: true
+  require_two_sided_mcnemar_p_lt: 0.05
+  require_full_ablation_and_cost_report: true
+  require_equal_call_single_model_baselines: true
+  require_pre_pair_style_pointwise_pairwise_baseline: true
+  blind_test_authorized_only_after_all_development_gates_pass: true

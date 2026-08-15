@@ -1,0 +1,11 @@
+version: 1
+status: frozen_source_only_registry
+datasets:
+  - dataset: mmlu_pro
+    split: validation
+    modality: language
+    source_or_target: source
+    development_or_locked_test: development_source
+    cache_path: outputs/bench_coe/mmlu_pro_validation_single_models
+    sample_count: 70
+    label_use: source_training_only

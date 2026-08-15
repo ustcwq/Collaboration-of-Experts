@@ -1,0 +1,42 @@
+protocol_version: 2
+protocol_name: source_subject_conditioned_expert_consensus_gpqa_gate_dense_v2a
+protocol_seed: 20260814
+scope: development_ood_posthoc_dense_gate_diagnostic
+portfolio_config: configs/innovation/strict_positive_dataset_portfolios_v1.yaml
+test_receipt: outputs/bench_coe/innovation/receipts/conditioned_expert_consensus_gpqa_gate_dense_v2a_tests.json
+output_root: outputs/bench_coe/innovation/conditioned_expert_consensus/gpqa_gate_dense_v2a_20260814
+fcrg_method: fcrg_full
+datasets:
+  gpqa_cached_eval:
+    source_config: configs/innovation/prior_art_overlap_language_ood_gpu0_3_v2.yaml
+    target_panel_config: configs/innovation/prior_art_overlap_language_ood_gpu0_3_v2.yaml
+    base_method: more_style_minilm
+    source_subject_groups:
+      physics: physics
+      chemistry: chemistry
+      biology: biology
+      math: other
+      business: other
+      psychology: other
+      economics: other
+      health: other
+      engineering: other
+      law: other
+      history: other
+      philosophy: other
+      computer science: other
+      other: other
+    target_subject_groups:
+      Physics: physics
+      Chemistry: chemistry
+      Biology: biology
+candidate_grid:
+  prior_strengths: [50.0]
+  reliability_powers: [4.0]
+  uncertainty_temperatures: [0.0]
+  family_balance: [true]
+  validity_powers: [0.0]
+  fallback_shares: [0.4, 0.425, 0.45, 0.475, 0.5, 0.525, 0.55, 0.575, 0.6]
+  minimum_advantages: [0.0, 0.01, 0.02, 0.025, 0.03, 0.035, 0.04, 0.05, 0.06, 0.075, 0.1]
+acceptance:
+  minimum_delta_vs_fcrg: 0.01

@@ -1,0 +1,14 @@
+protocol_version: 1
+protocol_name: source_oof_weighted_method_consensus_multimodal_v1
+protocol_seed: 20260814
+scope: source_trained_development_ood_diagnostic
+portfolio_config: configs/innovation/strict_positive_dataset_portfolios_v1.yaml
+test_receipt: outputs/bench_coe/innovation/receipts/source_weighted_consensus_v1_tests.json
+output_root: outputs/bench_coe/innovation/source_weighted_consensus/multimodal_v1_20260814
+source_job: source_loso
+targets: [cmmmu_val]
+reference_method: fcrg_full
+expected_full_pool_methods: 57
+candidate_grid:
+  subsets: [all, core_fcrg]
+  structural_weightings: [equal, signature]

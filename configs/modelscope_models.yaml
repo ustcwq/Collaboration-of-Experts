@@ -1,0 +1,211 @@
+schema_version: benchcoe_model_registry_v1
+resources:
+  - logical_name: qwen3_1_7b
+    kind: model
+    candidate_modelscope_ids: [Qwen/Qwen3-1.7B]
+    profiles: [smoke, core, full]
+    required_profiles: [smoke, core, full]
+    modality: text
+    role: scale_family
+    precision: bf16
+    instruction_tuned: true
+    thinking_capability: true
+    runtime_overrides: {enable_thinking: false}
+    license: unknown_until_resolved
+  - logical_name: qwen3_4b
+    kind: model
+    candidate_modelscope_ids: [Qwen/Qwen3-4B]
+    profiles: [core, full]
+    required_profiles: [core, full]
+    modality: text
+    role: scale_family
+    precision: bf16
+    instruction_tuned: true
+    thinking_capability: true
+    runtime_overrides: {enable_thinking: false}
+    license: unknown_until_resolved
+  - logical_name: qwen3_8b
+    kind: model
+    candidate_modelscope_ids: [Qwen/Qwen3-8B]
+    profiles: [core, full]
+    required_profiles: [core, full]
+    modality: text
+    role: scale_family
+    precision: bf16
+    instruction_tuned: true
+    thinking_capability: true
+    runtime_overrides: {enable_thinking: false}
+    license: unknown_until_resolved
+  - logical_name: qwen3_14b
+    kind: model
+    candidate_modelscope_ids: [Qwen/Qwen3-14B]
+    profiles: [core, full]
+    required_profiles: [core, full]
+    modality: text
+    role: scale_family
+    precision: bf16
+    instruction_tuned: true
+    thinking_capability: true
+    runtime_overrides: {enable_thinking: false}
+    license: unknown_until_resolved
+  - logical_name: qwen3_32b
+    kind: model
+    candidate_modelscope_ids: [Qwen/Qwen3-32B]
+    profiles: [full]
+    required_profiles: [full]
+    modality: text
+    role: strong_anchor
+    precision: bf16
+    instruction_tuned: true
+    thinking_capability: true
+    runtime_overrides: {enable_thinking: false}
+    license: unknown_until_resolved
+  - logical_name: qwen25_math_7b
+    kind: model
+    candidate_modelscope_ids: [Qwen/Qwen2.5-Math-7B-Instruct]
+    profiles: [core, full]
+    required_profiles: [core, full]
+    modality: text
+    role: math_expert
+    precision: bf16
+    instruction_tuned: true
+    thinking_capability: false
+    license: unknown_until_resolved
+  - logical_name: qwen25_coder_7b
+    kind: model
+    candidate_modelscope_ids: [Qwen/Qwen2.5-Coder-7B-Instruct]
+    profiles: [core, full]
+    required_profiles: [core, full]
+    modality: text
+    role: code_expert
+    precision: bf16
+    instruction_tuned: true
+    thinking_capability: false
+    license: unknown_until_resolved
+  - logical_name: gemma3_12b_it
+    kind: model
+    candidate_modelscope_ids: []
+    search_queries: [Gemma-3-12B-IT official]
+    profiles: [full]
+    required_profiles: []
+    modality: text
+    role: cross_family
+    precision: bf16
+    instruction_tuned: true
+    license: unresolved
+  - logical_name: mistral_nemo_12b
+    kind: model
+    candidate_modelscope_ids: []
+    search_queries: [Mistral-Nemo-Instruct-2407 official]
+    profiles: [full]
+    required_profiles: []
+    modality: text
+    role: cross_family
+    precision: bf16
+    instruction_tuned: true
+    license: unresolved
+  - logical_name: llama31_8b_instruct
+    kind: model
+    candidate_modelscope_ids: []
+    search_queries: [Llama-3.1-8B-Instruct official]
+    profiles: [full]
+    required_profiles: []
+    modality: text
+    role: cross_family
+    precision: bf16
+    instruction_tuned: true
+    gated: true
+    license: restricted_until_confirmed
+  - logical_name: internvl35_2b
+    kind: model
+    candidate_modelscope_ids: [OpenGVLab/InternVL3_5-2B]
+    profiles: [smoke, core, full]
+    required_profiles: [smoke, core, full]
+    modality: vision_language
+    role: scale_family
+    precision: bf16
+    instruction_tuned: true
+    license: unknown_until_resolved
+  - logical_name: internvl35_4b
+    kind: model
+    candidate_modelscope_ids: [OpenGVLab/InternVL3_5-4B]
+    profiles: [core, full]
+    required_profiles: [core, full]
+    modality: vision_language
+    role: scale_family
+    precision: bf16
+    instruction_tuned: true
+    license: unknown_until_resolved
+  - logical_name: internvl35_8b
+    kind: model
+    candidate_modelscope_ids: [OpenGVLab/InternVL3_5-8B]
+    profiles: [core, full]
+    required_profiles: [core, full]
+    modality: vision_language
+    role: scale_family
+    precision: bf16
+    instruction_tuned: true
+    license: unknown_until_resolved
+  - logical_name: internvl35_14b
+    kind: model
+    candidate_modelscope_ids: [OpenGVLab/InternVL3_5-14B]
+    profiles: [core, full]
+    required_profiles: [core, full]
+    modality: vision_language
+    role: scale_family
+    precision: bf16
+    instruction_tuned: true
+    license: unknown_until_resolved
+  - logical_name: internvl35_38b
+    kind: model
+    candidate_modelscope_ids: [OpenGVLab/InternVL3_5-38B]
+    profiles: [full]
+    required_profiles: [full]
+    modality: vision_language
+    role: strong_anchor
+    precision: bf16
+    instruction_tuned: true
+    license: unknown_until_resolved
+  - logical_name: qwen25_vl_3b
+    kind: model
+    candidate_modelscope_ids: [Qwen/Qwen2.5-VL-3B-Instruct]
+    profiles: [core, full]
+    required_profiles: [core, full]
+    modality: vision_language
+    role: cross_family
+    precision: bf16
+    instruction_tuned: true
+    license: unknown_until_resolved
+  - logical_name: qwen25_vl_7b
+    kind: model
+    candidate_modelscope_ids: [Qwen/Qwen2.5-VL-7B-Instruct]
+    profiles: [core, full]
+    required_profiles: [core, full]
+    modality: vision_language
+    role: cross_family
+    precision: bf16
+    instruction_tuned: true
+    license: unknown_until_resolved
+  - logical_name: gemma3_4b_it
+    kind: model
+    candidate_modelscope_ids: []
+    search_queries: [Gemma-3-4B-IT official]
+    profiles: [full]
+    required_profiles: []
+    modality: vision_language
+    role: cross_family
+    precision: bf16
+    instruction_tuned: true
+    license: unresolved
+  - logical_name: gemma3_12b_it_vl
+    kind: model
+    candidate_modelscope_ids: []
+    search_queries: [Gemma-3-12B-IT multimodal official]
+    profiles: [full]
+    required_profiles: []
+    modality: vision_language
+    role: cross_family
+    precision: bf16
+    instruction_tuned: true
+    license: unresolved
+

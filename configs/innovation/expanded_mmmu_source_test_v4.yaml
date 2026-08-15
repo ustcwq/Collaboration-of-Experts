@@ -1,0 +1,52 @@
+protocol_version: 1
+protocol_name: expanded_mmmu_source_test_large_gain_v4
+protocol_seed: 20260814
+scope: source_loso_and_development_ood
+family_map: configs/innovation/expanded_expert_families_v3.yaml
+dataset_registry: docs/innovation/experiment_manifest_expanded_v4.yaml
+dataset_registry_sha256: 6d6aa0db32d83d60d1929b95c2865f517fb6e63ab23f3a0cf2bb492ce68502cb
+portfolio_config: configs/innovation/strict_positive_dataset_portfolios_v1.yaml
+test_receipt: outputs/bench_coe/innovation/receipts/large_gain_v4_stage1_tests_v2.json
+v3_run_root: outputs/bench_coe/innovation/large_gain_portfolio/v3_20260814
+output_root: outputs/bench_coe/innovation/expanded_mmmu_source_test/v4_20260814
+bootstrap_samples: 10000
+experts:
+  - GLM-4.1V-9B-Thinking
+  - InternVL3_5-14B
+  - InternVL3_5-8B
+  - Llama-3.1-Nemotron-Nano-VL-8B-V1
+  - Phi-4-reasoning-vision-15B
+  - Qwen2.5-VL-7B-Instruct
+  - Qwen3-VL-8B-Thinking
+  - gemma-3-12b-it
+target_projection:
+  input_cache_path: outputs/bench_coe/scale_transfer_views_20260802/vision/mmmu_pro/standard_10_options/test
+  id_prefix: test_
+  dataset: mmmu_pro
+  split: test_id
+  modality: multimodal
+  expected_questions: 1153
+source:
+  dataset: mmmu_pro
+  split: validation_id
+  modality: multimodal
+  cache_path: outputs/bench_coe/innovation/expanded_caches/v3_20260814/mmmu_pro_validation_id_expanded8
+  expected_questions: 577
+  projection_manifest: outputs/bench_coe/innovation/expanded_caches/v3_20260814/mmmu_pro_validation_id_expanded8/source_projection_manifest.json
+  projection_manifest_sha256: 3cf67098f9c665efc6aa96439e9d931764ca88f8fdf2fb6a1538971d32b2a392
+target:
+  name: mmmu_pro_test_id
+  dataset: mmmu_pro
+  split: test_id
+  modality: multimodal
+  label_cache_path: outputs/bench_coe/innovation/expanded_caches/v4_20260814/mmmu_pro_test_id_expanded8
+  observable_cache_path: outputs/bench_coe/innovation/sanitized_targets/v4_20260814/mmmu_pro_test_id_expanded8
+  observable_manifest_sha256: 49061721b72bc3d85981487a3acc58a289720b6f6a85523914b7f1a497de9f14
+  projection_manifest: outputs/bench_coe/innovation/expanded_caches/v4_20260814/mmmu_pro_test_id_expanded8/target_projection_manifest.json
+  projection_manifest_sha256: 609eb5181c26aef9ec3ec13d24e99c556d5dd0759833aef822af962c23ade551
+  expected_questions: 1153
+acceptance:
+  minimum_delta_vs_fcrg: 0.05
+  v3_accuracy_floors:
+    source_loso: 0.30329289428076256
+    mmmu_pro_test_id: 0.33304423243712056

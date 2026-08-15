@@ -1,0 +1,139 @@
+protocol_version: 2
+protocol_name: improve5_6_prior_art_overlap_language_development_ood
+scope: development_ood_diagnostic_only
+source_gate_overridden: false
+seeds: [20260830, 20260831, 20260832, 20260833]
+run_physical_gpus: [0, 1, 2, 3]
+family_map: configs/innovation/expert_families.yaml
+dataset_registry: docs/innovation/experiment_manifest.yaml
+dataset_registry_sha256: 3cc1bf93adc5e7d0b7277447659317184377739d592c68b831dd5768b8cedb79
+test_receipt: outputs/bench_coe/innovation/receipts/prior_art_overlap_complete_v4_tests.json
+output_root: outputs/bench_coe/innovation/prior_art_overlap/language_ood_gpu0_3_v2_20260814
+
+response_embedding:
+  model_id: sentence-transformers/all-MiniLM-L6-v2
+  local_files_only: true
+  pooling: masked_mean_l2
+  batch_size: 256
+  max_length: 128
+
+knn_k: 32
+knn_sensitivity: [8, 16, 32, 64]
+mcb_behavior_threshold: 0.70
+mcb_min_neighbors: 5
+cascade_uncertainty_thresholds: [0.0, 0.1, 0.25, 0.5, 1.0]
+seed_bootstrap_samples: 1000
+aggregate_bootstrap_seed: 20260814
+comparison_bootstrap_samples: 2000
+primary_bootstrap_samples: 10000
+expected_source_questions: 70
+expected_full_pool_methods: 57
+
+pool_shift:
+  pools: {}
+  methods: []
+
+stochastic_method_patterns:
+  - learned_mlp_selector
+  - fcrg_random_edges
+  - fcrg_degree_relabel
+
+required_baseline_methods:
+  - global_best_posthoc
+  - fast_global_best_single_call
+  - majority_answer_support
+  - ola_metadata
+  - lca_support_class
+  - mcb_dcs_structured
+  - knop_output_profile
+  - knora_u_output_profile
+  - knora_e_output_profile
+  - meta_des_logistic
+  - more_style_structured
+  - more_style_minilm
+  - smoothie_global_spectral
+  - smoothie_local_spectral
+  - smoothie_global_minilm
+  - smoothie_local_minilm
+  - uncertainty_only
+  - agreement_x_global
+  - local_knn_only
+  - global_local_rank
+  - learned_logistic_selector
+  - learned_mlp_selector
+  - oprs_robust_output_profile
+
+required_fcrg_methods:
+  - fcrg_full
+  - fcrg_g_only
+  - fcrg_a_only
+  - fcrg_l_only
+  - fcrg_column_mean_only
+  - fcrg_h1_only
+  - fcrg_h2_only
+  - fcrg_h1_h2
+  - fcrg_no_failure_conditioning
+  - fcrg_no_a_no_u
+  - fcrg_no_l
+  - fcrg_no_g
+  - fcrg_no_self
+  - fcrg_row_normalized
+  - fcrg_column_normalized
+  - fcrg_row_softmax
+  - fcrg_symmetric
+  - fcrg_random_edges
+  - fcrg_degree_relabel
+  - fcrg_depth_1
+  - fcrg_depth_2
+  - fcrg_depth_3
+  - fcrg_depth_4
+  - fcrg_depth_5
+  - fcrg_learned_weights
+
+experts:
+  - Baichuan2-7B-Chat
+  - General-Reasoner-7B-preview
+  - Llama-3.1-8B-Instruct
+  - MAmmoTH2-8B-Plus
+  - Ministral-8B-Instruct-2410
+  - Nemotron-H-8B-Reasoning-128K
+  - Qwen2.5-7B-Instruct
+  - Yi-1.5-9B-Chat
+  - Yi-9B
+  - aya-expanse-8b
+  - gemma-2-9b-it
+  - glm-4-9b-chat
+  - granite-3.3-8b-instruct
+  - internlm3-8b-instruct
+
+source:
+  dataset: mmlu_pro
+  split: validation
+  modality: language
+  cache_path: outputs/bench_coe/mmlu_pro_validation_single_models
+
+targets:
+  - name: bbh_cached_eval
+    dataset: bbh
+    split: cached_eval
+    modality: language
+    label_cache_path: outputs/model_benchmarks/official_code_local_models/bbh
+    observable_cache_path: outputs/bench_coe/innovation/sanitized_targets/prior_art_v2/bbh_common14
+    observable_manifest_sha256: cad430903aeeb9808d9a54b1d43be5e21ddc1025f2aca36f40c1b185cd3deb37
+    expected_questions: 6511
+  - name: gpqa_cached_eval
+    dataset: gpqa
+    split: cached_eval
+    modality: language
+    label_cache_path: outputs/model_benchmarks/official_code_local_models/gpqa
+    observable_cache_path: outputs/bench_coe/innovation/sanitized_targets/prior_art_v2/gpqa_common14
+    observable_manifest_sha256: 63c30c6f30322870c33c6d378096317203b18a274a5ea81ec9f33d9c5827d18a
+    expected_questions: 4768
+  - name: mmstar_text_only_test
+    dataset: mmstar_text_only
+    split: test
+    modality: language
+    label_cache_path: outputs/model_benchmarks/official_code_local_models/mmstar_text_only
+    observable_cache_path: outputs/bench_coe/innovation/sanitized_targets/prior_art_v2/mmstar_text_only_common14
+    observable_manifest_sha256: e888bd726f1fedbf860972b7956beff05a5fbe4285c2926852a1950f3b131f01
+    expected_questions: 1500

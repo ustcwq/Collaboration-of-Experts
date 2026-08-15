@@ -1,0 +1,49 @@
+schema_version: benchcoe_data_roles_v1
+roles:
+  source_calibration:
+    labels_visible: true
+    allowed_uses: [global_source_accuracy, improve5_local_reliability, improve6_repair_edges, source_cross_validation]
+  source_validation:
+    labels_visible: true
+    allowed_uses: [source_hyperparameter_selection]
+  target_locked_test:
+    labels_visible: final_scoring_only
+    forbidden_uses: [expert_pool_selection, k_selection, edge_threshold_selection, source_selection, prompt_selection, parser_selection, subset_selection, model_ordering]
+  secondary_test:
+    labels_visible: final_scoring_only
+    forbidden_uses: [expert_pool_selection, hyperparameter_selection, prompt_selection]
+datasets:
+  mmlu_pro: {role: source_calibration, splits: [validation]}
+  arc_challenge: {role: source_calibration, splits: [train, validation]}
+  logiqa2: {role: source_calibration, splits: [train, validation]}
+  bbh: {role: target_locked_test, splits: [test]}
+  gpqa: {role: target_locked_test, splits: [test]}
+  livebench: {role: secondary_test, splits: [test]}
+  musr: {role: secondary_test, splits: [test]}
+  hle: {role: secondary_test, splits: [test]}
+  hle_verified: {role: secondary_test, splits: [test]}
+  mmmu_pro: {role: source_calibration, splits: [validation]}
+  scienceqa: {role: source_calibration, splits: [train, validation]}
+  ai2d: {role: source_calibration, splits: [train, validation]}
+  chartqa: {role: source_calibration, splits: [train, validation]}
+  mmstar: {role: target_locked_test, splits: [test]}
+  cmmmu: {role: target_locked_test, splits: [validation]}
+  mathvista: {role: target_locked_test, splits: [testmini, test]}
+  blink: {role: secondary_test, splits: [test]}
+  naturalbench: {role: secondary_test, splits: [test]}
+  cvbench: {role: secondary_test, splits: [test]}
+  charxiv: {role: secondary_test, splits: [test]}
+protocol:
+  version: 1
+  prompt_version: benchcoe_default_v1
+  answer_parser_version: benchcoe_answer_mapping_v1
+  decoding: {temperature: 0.0, do_sample: false}
+  qwen3: {enable_thinking: false}
+  source_hyperparameter_search_space: {}
+  primary_datasets: [bbh, gpqa, mmstar, cmmmu, mathvista]
+  secondary_datasets: [livebench, musr, hle, hle_verified, blink, naturalbench, cvbench, charxiv]
+  exclusions:
+    - target labels are final-scoring only
+    - prompt variants are not independent experts
+    - random seeds are not independent experts
+

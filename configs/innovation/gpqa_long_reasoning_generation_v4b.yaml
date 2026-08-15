@@ -1,0 +1,40 @@
+protocol_version: 2
+protocol_name: gpqa_source_best_long_reasoning_v4b
+protocol_seed: 20260814
+scope: label_free_development_ood_inference
+test_receipt: outputs/bench_coe/innovation/receipts/gpqa_long_reasoning_v4b_tests.json
+model_path: models/DeepSeek-R1-0528-Qwen3-8B
+model_weight_sha256:
+  model-00001-of-000002.safetensors: 7bb656406ecf282bcb44b87a93c0daa2c0ef32d1b335fdef65722e8c45d28fe3
+  model-00002-of-000002.safetensors: 8c3631d826c04565ad79c026fa291cd142aa4b75c69cc717f9c513e2ed061b4e
+source_selection:
+  dataset: mmlu_pro
+  split: validation
+  summary_root: outputs/bench_coe/mmlu_pro_validation_single_models
+  selected_model: DeepSeek-R1-0528-Qwen3-8B
+  selected_source_accuracy: 0.7428571428571429
+  selected_summary_sha256: 24da09fafaf8329d206c8f3c9cf41db2fa572598e9a697c3a260eec4f02804ea
+target_observables:
+  dataset: gpqa
+  split: cached_eval
+  cache_path: outputs/bench_coe/innovation/sanitized_targets/permutation_v1/gpqa_common14
+  observable_manifest_sha256: d9e0b4ac157c0c200a5275abb1743937cbadca0ef6c728dd69b6f2f0ab4cd6fc
+  metadata_expert_id: Baichuan2-7B-Chat
+  expected_questions: 4768
+  expected_epoch0_questions: 1192
+generation:
+  shard_count: 4
+  max_model_len: 16384
+  max_new_tokens: 3200
+  reasoning_token_budget: 3000
+  finalizer_max_tokens: 8
+  finalizer_choices:
+    - "Answer: (A)"
+    - "Answer: (B)"
+    - "Answer: (C)"
+    - "Answer: (D)"
+  batch_size: 4
+  gpu_memory_utilization: 0.88
+  dtype: auto
+  enforce_eager: true
+output_root: outputs/bench_coe/innovation/gpqa_long_reasoning/v4b_20260814

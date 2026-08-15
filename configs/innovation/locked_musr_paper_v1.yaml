@@ -1,0 +1,186 @@
+protocol_version: 1
+experiment_id: locked_musr_paper_v1_20260815
+status: preregistered_before_target_prediction
+scope: confirmatory_secondary_test
+target_use_policy:
+  questions_and_model_outputs_visible: true
+  target_answers_visible: evaluator_only_after_prediction_seal
+  forbidden_target_uses:
+    - fitting
+    - hyperparameter_selection
+    - method_selection
+    - prompt_selection
+    - parser_selection
+    - expert_pool_selection
+    - seed_selection
+    - subset_selection
+    - stopping_rule
+  evaluate_all_expected_questions: true
+  preserve_negative_results: true
+
+output_root: outputs/bench_coe/innovation/locked_musr/paper_v1_20260815
+single_use_ledger: outputs/bench_coe/innovation/locked_registry.json
+test_receipt: outputs/bench_coe/innovation/receipts/locked_musr_paper_v1_tests_v2.json
+source_registry: configs/innovation/locked_musr_source_registry_v1.yaml
+source_registry_sha256: 70eed7642d0d336643d9582e551c3abd6d3612c7b6bb19b75f7606895a4f4af0
+family_map: configs/innovation/expert_families.yaml
+family_map_sha256: 3c967c4806b5ca9876a8cf44906d61d342c47659b2f8fe1c9ea18327b79d3e2a
+
+source:
+  dataset: mmlu_pro
+  split: validation
+  modality: language
+  cache_path: outputs/bench_coe/mmlu_pro_validation_single_models
+  expected_questions: 70
+
+target:
+  dataset: musr
+  split: test
+  modality: language
+  expected_questions: 756
+  statistical_unit: unique_question
+  raw_files:
+    - task: murder_mysteries
+      path: data/musr/murder_mystery.csv
+      sha256: ce19b6dc0b953f698e79528c72705804bc97e772a4303734808971f63ce233a7
+      expected_questions: 250
+    - task: object_placements
+      path: data/musr/object_placements.csv
+      sha256: 98cd17d2c9ea53664e274365e901c90dfcaa40d17547dfbd369f1cd26fd2a81c
+      expected_questions: 256
+    - task: team_allocation
+      path: data/musr/team_allocation.csv
+      sha256: ddbef3bb61857a7cc3b73db62fac4605679e1b7ff4357d57fdfcf91f7caaa1f8
+      expected_questions: 250
+
+models_dir: models
+physical_gpus: [0, 1, 2, 3]
+experts:
+  - Baichuan2-7B-Chat
+  - General-Reasoner-7B-preview
+  - Llama-3.1-8B-Instruct
+  - MAmmoTH2-8B-Plus
+  - Ministral-8B-Instruct-2410
+  - Nemotron-H-8B-Reasoning-128K
+  - Qwen2.5-7B-Instruct
+  - Yi-1.5-9B-Chat
+  - Yi-9B
+  - aya-expanse-8b
+  - gemma-2-9b-it
+  - glm-4-9b-chat
+  - granite-3.3-8b-instruct
+  - internlm3-8b-instruct
+
+generation:
+  backend: vllm
+  prompt_version: musr_cot_fixed_v1
+  parser_version: final_choice_letter_v1
+  seed: 20260815
+  temperature: 0.0
+  top_p: 1.0
+  max_model_len: 4096
+  max_new_tokens: 512
+  batch_size: 32
+  gpu_memory_utilization: 0.88
+  dtype: auto
+  trust_remote_code: true
+  truncation: tokenizer_head_tail
+  save_prompts: false
+
+selector:
+  seed: 20260815
+  knn_k: 32
+  mcb_behavior_threshold: 0.70
+  mcb_min_neighbors: 5
+  response_embedding:
+    model_id: sentence-transformers/all-MiniLM-L6-v2
+    local_files_only: true
+    pooling: masked_mean_l2
+    batch_size: 256
+    max_length: 128
+
+methods:
+  source_best_single:
+    internal: fast_global_best_single_call
+    nominal_model_calls: 1
+    role: efficiency_reference
+  source_weighted_vote_14:
+    internal: global_best_posthoc
+    nominal_model_calls: 14
+    role: primary_reference
+  majority_vote_14:
+    internal: majority_answer_support
+    nominal_model_calls: 14
+    role: baseline
+  knop_output_profile:
+    internal: knop_output_profile
+    nominal_model_calls: 14
+    role: prior_art_baseline
+  oprs_output_profile:
+    internal: oprs_robust_output_profile
+    nominal_model_calls: 14
+    role: prior_art_baseline
+  more_minilm:
+    internal: more_style_minilm
+    nominal_model_calls: 14
+    role: prior_art_baseline
+  smoothie_local_minilm:
+    internal: smoothie_local_minilm
+    nominal_model_calls: 14
+    role: prior_art_baseline
+  fcrg_full:
+    internal: fcrg_full
+    nominal_model_calls: 14
+    role: predecessor
+  fcrg_h1_primary:
+    internal: fcrg_h1_only
+    nominal_model_calls: 14
+    role: primary_method
+  fcrg_column_centrality:
+    internal: fcrg_column_mean_only
+    nominal_model_calls: 14
+    role: static_control
+  fcrg_random_graph:
+    internal: fcrg_random_edges
+    nominal_model_calls: 14
+    role: negative_control
+
+hypotheses:
+  primary:
+    candidate: fcrg_h1_primary
+    reference: source_weighted_vote_14
+    estimand: micro_accuracy_delta
+    success_rule: delta_gt_0_and_two_sided_mcnemar_p_lt_0.05_and_stratified_ci_low_gt_0
+  secondary_comparisons:
+    - [fcrg_h1_primary, fcrg_full]
+    - [fcrg_h1_primary, majority_vote_14]
+    - [fcrg_h1_primary, knop_output_profile]
+    - [fcrg_h1_primary, oprs_output_profile]
+    - [fcrg_h1_primary, more_minilm]
+    - [fcrg_h1_primary, smoothie_local_minilm]
+    - [fcrg_h1_primary, fcrg_column_centrality]
+    - [fcrg_h1_primary, fcrg_random_graph]
+  multiplicity: holm_for_secondary_family
+  bootstrap_samples: 10000
+  bootstrap_seed: 20260815
+  bootstrap_scheme: paired_within_task_stratified
+  confidence_level: 0.95
+  report_task_macro_accuracy: true
+
+fairness:
+  selectors_share_identical_frozen_expert_outputs: true
+  equal_call_primary_comparison: true
+  no_target_adaptive_early_stopping: true
+  no_posthoc_subset_reporting: true
+  model_pool_frozen_from_development_protocol: true
+  deterministic_decoding: true
+
+claim_boundary:
+  current_v1_to_v4_results: development_only
+  musr_status_before_run: experimenter_untouched_local_secondary_test
+  pretraining_contamination_excluded: false
+  allowed_claim: one_experimenter_blind_cross_dataset_test_with_fixed_local_model_pool
+  forbidden_claims:
+    - universally_best_selector
+    - hidden_from_model_pretraining
+    - improvement_on_every_dataset

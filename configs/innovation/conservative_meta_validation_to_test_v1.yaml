@@ -1,0 +1,157 @@
+protocol_version: 1
+protocol_name: conservative_meta_validation_to_test_development_diagnostic
+protocol_seed: 20260814
+scope: development_ood_diagnostic_only
+test_receipt: outputs/bench_coe/innovation/receipts/conservative_meta_validation_to_test_v1_tests.json
+output_root: outputs/bench_coe/innovation/conservative_meta_optimization/validation_to_test_v1_20260814
+
+source_config: configs/innovation/prior_art_overlap_source_loso_gpu0_3_v2.yaml
+source_run_root: outputs/bench_coe/innovation/prior_art_overlap/source_loso_gpu0_3_v2_20260814
+source_seeds: [20260822, 20260823, 20260824, 20260825]
+
+target_panels:
+  - name: multimodal
+    config: configs/innovation/prior_art_overlap_multimodal_ood_gpu0_3_v2.yaml
+    run_root: outputs/bench_coe/innovation/prior_art_overlap/multimodal_ood_gpu0_3_v2_retry1_20260814
+  - name: language
+    config: configs/innovation/prior_art_overlap_language_ood_gpu0_3_v2.yaml
+    run_root: outputs/bench_coe/innovation/prior_art_overlap/language_ood_gpu0_3_v2_20260814
+
+registered_aggregate_summaries:
+  - outputs/bench_coe/innovation/prior_art_overlap/source_loso_gpu0_3_v2_20260814/aggregate/aggregate_summary.csv
+  - outputs/bench_coe/innovation/prior_art_overlap/multimodal_ood_gpu0_3_v2_retry1_20260814/aggregate/aggregate_summary.csv
+  - outputs/bench_coe/innovation/prior_art_overlap/language_ood_gpu0_3_v2_20260814/aggregate/aggregate_summary.csv
+
+report_controls:
+  - fcrg_full
+  - global_best_posthoc
+  - global_local_rank
+
+finalist_count: 24
+
+search:
+  references: [fcrg_full]
+  method_pools:
+    core_diverse:
+      - fcrg_full
+      - global_best_posthoc
+      - global_local_rank
+      - majority_answer_support
+      - agreement_x_global
+      - knop_output_profile
+      - mcb_dcs_structured
+      - meta_des_logistic
+      - more_style_structured
+      - more_style_minilm
+      - smoothie_global_spectral
+      - smoothie_local_spectral
+      - smoothie_local_minilm
+      - oprs_robust_output_profile
+      - fcrg_h1_only
+      - fcrg_row_normalized
+      - fcrg_learned_weights
+    repair_safe:
+      - fcrg_full
+      - global_best_posthoc
+      - global_local_rank
+      - fcrg_h1_only
+      - fcrg_h2_only
+      - fcrg_h1_h2
+      - fcrg_no_failure_conditioning
+      - fcrg_no_l
+      - fcrg_no_g
+      - fcrg_no_self
+      - fcrg_row_normalized
+      - fcrg_column_normalized
+      - fcrg_symmetric
+      - fcrg_learned_weights
+      - majority_answer_support
+      - agreement_x_global
+      - knop_output_profile
+    all_stable:
+      - global_best_posthoc
+      - majority_answer_support
+      - ola_metadata
+      - lca_support_class
+      - mcb_dcs_structured
+      - knop_output_profile
+      - knora_u_output_profile
+      - knora_e_output_profile
+      - meta_des_logistic
+      - more_style_structured
+      - more_style_minilm
+      - smoothie_global_spectral
+      - smoothie_local_spectral
+      - smoothie_global_minilm
+      - smoothie_local_minilm
+      - agreement_x_global
+      - global_local_rank
+      - learned_logistic_selector
+      - oprs_robust_output_profile
+      - fcrg_full
+      - fcrg_h1_only
+      - fcrg_h2_only
+      - fcrg_h1_h2
+      - fcrg_no_failure_conditioning
+      - fcrg_no_l
+      - fcrg_no_g
+      - fcrg_no_self
+      - fcrg_row_normalized
+      - fcrg_column_normalized
+      - fcrg_symmetric
+      - fcrg_learned_weights
+
+  family_by_method:
+    global_best_posthoc: global_anchor
+    majority_answer_support: support_vote
+    ola_metadata: dynamic_selection
+    lca_support_class: dynamic_selection
+    mcb_dcs_structured: dynamic_selection
+    knop_output_profile: dynamic_selection
+    knora_u_output_profile: support_vote
+    knora_e_output_profile: dynamic_selection
+    meta_des_logistic: learned_selection
+    more_style_structured: response_selection
+    more_style_minilm: response_selection
+    smoothie_global_spectral: global_anchor
+    smoothie_local_spectral: response_selection
+    smoothie_global_minilm: global_anchor
+    smoothie_local_minilm: response_selection
+    agreement_x_global: support_vote
+    global_local_rank: dynamic_selection
+    learned_logistic_selector: learned_selection
+    oprs_robust_output_profile: dynamic_selection
+    fcrg_full: repair_graph
+    fcrg_h1_only: repair_graph
+    fcrg_h2_only: repair_graph
+    fcrg_h1_h2: repair_graph
+    fcrg_no_failure_conditioning: repair_graph
+    fcrg_no_l: repair_graph
+    fcrg_no_g: repair_graph
+    fcrg_no_self: repair_graph
+    fcrg_row_normalized: repair_graph
+    fcrg_column_normalized: repair_graph
+    fcrg_symmetric: repair_graph
+    fcrg_learned_weights: learned_selection
+
+  weightings:
+    - equal
+    - rank
+    - {name: softmax_accuracy, temperature: 0.005}
+    - {name: softmax_accuracy, temperature: 0.01}
+    - {name: softmax_accuracy, temperature: 0.02}
+    - {name: softmax_accuracy, temperature: 0.05}
+    - {name: beta_lcb, temperature: 0.01}
+    - {name: beta_lcb, temperature: 0.02}
+    - {name: safe_utility, temperature: 0.005, risk_penalty: 1.0}
+    - {name: safe_utility, temperature: 0.005, risk_penalty: 1.5}
+    - {name: safe_utility, temperature: 0.005, risk_penalty: 2.0}
+    - {name: minimax, temperature: 0.01}
+    - {name: minimax, temperature: 0.02}
+  aggregations: [hard, cluster_rank]
+  top_k: [0, 5, 9, 15]
+  family_balanced: [false, true]
+  min_share: [0.0, 0.35, 0.45, 0.55]
+  min_margin: [0.0, 0.05, 0.10]
+  min_families: [1, 2, 3]
+

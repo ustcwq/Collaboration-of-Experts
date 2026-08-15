@@ -1,0 +1,16 @@
+protocol_version: 1
+protocol_name: method_consensus_target_label_firewalled_diagnostic_v1
+protocol_seed: 20260814
+scope: development_ood_posthoc_candidate_diagnostic
+portfolio_config: configs/innovation/strict_positive_dataset_portfolios_v1.yaml
+test_receipt: outputs/bench_coe/innovation/receipts/method_consensus_diagnostic_v1_tests.json
+output_root: outputs/bench_coe/innovation/method_consensus/diagnostic_v1_20260814
+targets: [cmmmu_val, gpqa_cached_eval]
+reference_method: fcrg_full
+expected_full_pool_methods: 57
+candidate_grid:
+  subsets: [all, core, nonstochastic, core_fcrg]
+  global_weightings: [equal, signature, family, agreement, signature_agreement]
+  confidence_powers: [0.0, 1.0]
+  fallback_shares: [0.0, 0.4]
+expected_candidate_count: 80

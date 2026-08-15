@@ -1,0 +1,32 @@
+protocol_version: 2
+protocol_name: domain_guarded_conservative_meta_validation_to_test_diagnostic
+protocol_seed: 20260814
+scope: development_ood_diagnostic_only
+test_receipt: outputs/bench_coe/innovation/receipts/domain_guarded_meta_validation_to_test_v2_tests.json
+output_root: outputs/bench_coe/innovation/domain_guarded_meta/validation_to_test_v2_20260814
+
+upstream_run_root: outputs/bench_coe/innovation/conservative_meta_optimization/validation_to_test_v1_20260814
+source_config: configs/innovation/prior_art_overlap_source_loso_gpu0_3_v2.yaml
+source_run_root: outputs/bench_coe/innovation/prior_art_overlap/source_loso_gpu0_3_v2_20260814
+source_seeds: [20260822, 20260823, 20260824, 20260825]
+
+target_panels:
+  - name: multimodal
+    config: configs/innovation/prior_art_overlap_multimodal_ood_gpu0_3_v2.yaml
+    run_root: outputs/bench_coe/innovation/prior_art_overlap/multimodal_ood_gpu0_3_v2_retry1_20260814
+  - name: language
+    config: configs/innovation/prior_art_overlap_language_ood_gpu0_3_v2.yaml
+    run_root: outputs/bench_coe/innovation/prior_art_overlap/language_ood_gpu0_3_v2_20260814
+
+registered_aggregate_summaries:
+  - outputs/bench_coe/innovation/prior_art_overlap/source_loso_gpu0_3_v2_20260814/aggregate/aggregate_summary.csv
+  - outputs/bench_coe/innovation/prior_art_overlap/multimodal_ood_gpu0_3_v2_retry1_20260814/aggregate/aggregate_summary.csv
+  - outputs/bench_coe/innovation/prior_art_overlap/language_ood_gpu0_3_v2_20260814/aggregate/aggregate_summary.csv
+
+base_candidate_count: 4
+domain_policies:
+  dataset_metrics: [mean, combined]
+  quantiles: [0.50, 0.75, 0.90, 1.00]
+  query_quantiles: [0.50, 0.75, 0.90, 0.95]
+  combined_quantiles: [0.75, 0.90]
+

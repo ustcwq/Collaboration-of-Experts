@@ -1,0 +1,96 @@
+protocol_version: 2
+protocol_name: blind_falsification_jury_development_v2
+status: development_only_no_confirmatory_claim
+seed: 20260815
+output_root: outputs/bench_coe/innovation/blind_falsification_jury/dev_v2_20260815
+models_dir: models
+physical_gpus: [0, 1, 2, 3]
+
+data_policy:
+  labels_are_development_only: true
+  generation_reads_labels: false
+  consumed_locked_tests_excluded:
+    - musr_test
+  previously_observed_sets_may_only_be_used_for_development: true
+  statistical_unit: unique_question
+
+experts:
+  - Baichuan2-7B-Chat
+  - General-Reasoner-7B-preview
+  - Llama-3.1-8B-Instruct
+  - MAmmoTH2-8B-Plus
+  - Ministral-8B-Instruct-2410
+  - Nemotron-H-8B-Reasoning-128K
+  - Qwen2.5-7B-Instruct
+  - Yi-1.5-9B-Chat
+  - Yi-9B
+  - aya-expanse-8b
+  - gemma-2-9b-it
+  - glm-4-9b-chat
+  - granite-3.3-8b-instruct
+  - internlm3-8b-instruct
+
+auditors:
+  - Qwen2.5-7B-Instruct
+  - General-Reasoner-7B-preview
+  - Yi-1.5-9B-Chat
+  - Nemotron-H-8B-Reasoning-128K
+
+datasets:
+  - name: mmlu_pro_validation
+    dataset: mmlu_pro
+    split: validation
+    role: development
+    expected_questions: 70
+    cache_path: outputs/bench_coe/mmlu_pro_validation_single_models
+  - name: gpqa_diamond_epoch0
+    dataset: gpqa
+    split: diamond_epoch0
+    role: development
+    expected_questions: 198
+    label_cache_path: outputs/model_benchmarks/official_code_local_models/gpqa
+    observable_cache_path: outputs/bench_coe/innovation/sanitized_targets/prior_art_v2/gpqa_common14
+    reference_model: Qwen2.5-7B-Instruct
+    config: diamond
+    epoch: 0
+
+generation:
+  backend: vllm
+  prompt_version: anonymous_option_falsification_v2
+  parser_version: anchored_line_fields_v2
+  seed: 20260815
+  temperature: 0.0
+  top_p: 1.0
+  max_model_len: 4096
+  max_new_tokens: 256
+  batch_size: 32
+  gpu_memory_utilization: 0.82
+  dtype: auto
+  trust_remote_code: true
+  truncation: tokenizer_head_tail
+
+outer_validation:
+  scheme: leave_one_environment_out
+  environment: dataset_plus_subject
+  nested_selection: true
+  bootstrap_samples: 10000
+  bootstrap_seed: 20260815
+
+variant_grid:
+  prior_strength: [0.5, 1.0, 2.0]
+  evidence_strength: [0.5, 1.0, 1.5]
+  smoothing: [1.0, 2.0]
+  use_confidence_bins: [false, true]
+  calibrate_self_bias: [false, true]
+  open_option_set: [false, true]
+  intervention_margin: [0.0, 0.05, 0.10]
+  max_abs_log_likelihood_ratio: 2.5
+  confidence_threshold: 67
+
+acceptance:
+  minimum_oof_delta_vs_deployable_best_single_pp: 5.0
+  minimum_per_dataset_delta_pp: 0.0
+  require_paired_bootstrap_ci_low_gt_zero: true
+  require_two_sided_mcnemar_p_lt: 0.05
+  require_full_ablation_and_cost_report: true
+  blind_test_authorized_only_after_all_development_gates_pass: true

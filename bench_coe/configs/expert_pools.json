@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "pools": {
+    "language_7b_9b_specialists": {
+      "description": "MMLU-Pro/GAOKAO language expert candidates in the comparable 7B-9B scale band.",
+      "modality": "language",
+      "scale_group": "7b-9b",
+      "require_all_models": false,
+      "models": [
+        {"name": "Baichuan2-7B-Chat", "parameters_b": 7, "scale_group": "7b-9b", "data_source": "local"},
+        {"name": "DeepSeek-R1-0528-Qwen3-8B", "parameters_b": 8, "scale_group": "7b-9b", "data_source": "local", "exclude_reason": "globally strong generalist excluded from specialist selection"},
+        {"name": "General-Reasoner-7B-preview", "parameters_b": 7, "scale_group": "7b-9b", "data_source": "local"},
+        {"name": "Llama-3.1-8B-Instruct", "parameters_b": 8, "scale_group": "7b-9b", "data_source": "local"},
+        {"name": "MAmmoTH2-8B-Plus", "parameters_b": 8, "scale_group": "7b-9b", "data_source": "local"},
+        {"name": "Ministral-8B-Instruct-2410", "parameters_b": 8, "scale_group": "7b-9b", "data_source": "local"},
+        {"name": "Nemotron-H-8B-Reasoning-128K", "parameters_b": 8, "scale_group": "7b-9b", "data_source": "local"},
+        {"name": "Qwen2.5-7B-Instruct", "parameters_b": 7, "scale_group": "7b-9b", "data_source": "local"},
+        {"name": "Qwen3-8B", "parameters_b": 8, "scale_group": "7b-9b", "data_source": "local", "exclude_reason": "globally strong generalist excluded from specialist selection"},
+        {"name": "Qwen3.5-9B", "parameters_b": 9, "scale_group": "7b-9b", "data_source": "local", "exclude_reason": "globally strong generalist excluded from specialist selection"},
+        {"name": "Yi-1.5-9B-Chat", "parameters_b": 9, "scale_group": "7b-9b", "data_source": "local"},
+        {"name": "Yi-9B", "parameters_b": 9, "scale_group": "7b-9b", "data_source": "local"},
+        {"name": "aya-expanse-8b", "parameters_b": 8, "scale_group": "7b-9b", "data_source": "local"},
+        {"name": "gemma-2-9b-it", "parameters_b": 9, "scale_group": "7b-9b", "data_source": "local"},
+        {"name": "glm-4-9b-chat", "parameters_b": 9, "scale_group": "7b-9b", "data_source": "local"},
+        {"name": "granite-3.3-8b-instruct", "parameters_b": 8, "scale_group": "7b-9b", "data_source": "local"},
+        {"name": "internlm3-8b-instruct", "parameters_b": 8, "scale_group": "7b-9b", "data_source": "local"}
+      ]
+    },
+    "multimodal_1p6b_2p2b_specialists": {
+      "description": "Comparable small multimodal experts for MMMU and GAOKAO-MM subject selection.",
+      "modality": "multimodal",
+      "scale_group": "1.6b-2.2b",
+      "require_all_models": false,
+      "models": [
+        {"name": "InternVL3_5-2B", "parameters_b": 2, "scale_group": "1.6b-2.2b", "data_source": "local"},
+        {"name": "LFM2.5-VL-1.6B", "parameters_b": 1.6, "scale_group": "1.6b-2.2b", "data_source": "local"},
+        {"name": "Qwen3-VL-2B-Instruct", "parameters_b": 2, "scale_group": "1.6b-2.2b", "data_source": "local", "exclude_reason": "reserved as a router backbone"},
+        {"name": "Qwen3-VL-2B-Thinking", "parameters_b": 2, "scale_group": "1.6b-2.2b", "data_source": "local", "exclude_reason": "same router family reserved from the expert pool"},
+        {"name": "Qwen3.5-2B", "parameters_b": 2, "scale_group": "1.6b-2.2b", "data_source": "local"},
+        {"name": "SmolVLM2-2.2B-Base", "parameters_b": 2.2, "scale_group": "1.6b-2.2b", "data_source": "local"},
+        {"name": "SmolVLM2-2.2B-Instruct", "parameters_b": 2.2, "scale_group": "1.6b-2.2b", "data_source": "local"},
+        {"name": "gemma-4-E2B-it", "parameters_b": 2, "scale_group": "1.6b-2.2b", "data_source": "local"},
+        {"name": "glm-edge-v-2b", "parameters_b": 2, "scale_group": "1.6b-2.2b", "data_source": "local", "exclude_reason": "invalid all-zero evaluation outputs"}
+      ]
+    },
+    "multimodal_1p6b_2p2b_babyvision_judged": {
+      "description": "Comparable small multimodal experts with complete 388-sample BabyVision Qwen3.5-9B judgments.",
+      "modality": "multimodal",
+      "scale_group": "1.6b-2.2b",
+      "require_all_models": true,
+      "models": [
+        {"name": "InternVL3_5-2B", "parameters_b": 2, "scale_group": "1.6b-2.2b", "data_source": "local"},
+        {"name": "LFM2.5-VL-1.6B", "parameters_b": 1.6, "scale_group": "1.6b-2.2b", "data_source": "local"},
+        {"name": "Qwen3.5-2B", "parameters_b": 2, "scale_group": "1.6b-2.2b", "data_source": "local"},
+        {"name": "gemma-4-E2B-it", "parameters_b": 2, "scale_group": "1.6b-2.2b", "data_source": "local"}
+      ]
+    },
+    "multimodal_1p6b_2p2b_babyvision_qwen3vl_swap": {
+      "description": "BabyVision comparison pool replacing Qwen3.5-2B with Qwen3-VL-2B-Instruct; missing local judgments are conservatively scored incorrect.",
+      "modality": "multimodal",
+      "scale_group": "1.6b-2.2b",
+      "require_all_models": true,
+      "models": [
+        {"name": "InternVL3_5-2B", "parameters_b": 2, "scale_group": "1.6b-2.2b", "data_source": "local"},
+        {"name": "LFM2.5-VL-1.6B", "parameters_b": 1.6, "scale_group": "1.6b-2.2b", "data_source": "local"},
+        {"name": "Qwen3-VL-2B-Instruct", "parameters_b": 2, "scale_group": "1.6b-2.2b", "data_source": "local"},
+        {"name": "gemma-4-E2B-it", "parameters_b": 2, "scale_group": "1.6b-2.2b", "data_source": "local"}
+      ]
+    }
+  }
+}

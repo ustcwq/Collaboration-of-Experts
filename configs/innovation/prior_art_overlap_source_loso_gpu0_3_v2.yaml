@@ -1,0 +1,137 @@
+protocol_version: 2
+protocol_name: improve5_6_prior_art_overlap_complete_source
+seeds: [20260822, 20260823, 20260824, 20260825]
+run_physical_gpus: [0, 1, 2, 3]
+family_map: configs/innovation/expert_families.yaml
+dataset_registry: docs/innovation/experiment_manifest.yaml
+dataset_registry_sha256: 3cc1bf93adc5e7d0b7277447659317184377739d592c68b831dd5768b8cedb79
+test_receipt: outputs/bench_coe/innovation/receipts/prior_art_overlap_complete_v3_tests.json
+output_root: outputs/bench_coe/innovation/prior_art_overlap/source_loso_gpu0_3_v2_20260814
+
+response_embedding:
+  model_id: sentence-transformers/all-MiniLM-L6-v2
+  local_files_only: true
+  pooling: masked_mean_l2
+  batch_size: 256
+  max_length: 128
+
+knn_k: 32
+knn_sensitivity: [8, 16, 32, 64]
+mcb_behavior_threshold: 0.70
+mcb_min_neighbors: 5
+cascade_uncertainty_thresholds: [0.0, 0.1, 0.25, 0.5, 1.0]
+seed_bootstrap_samples: 1000
+aggregate_bootstrap_seed: 20260814
+aggregate_bootstrap_samples: 10000
+expected_source_questions: 577
+expected_source_environments: 30
+expected_full_pool_methods: 57
+
+fcrg_gate:
+  required_micro_delta: 0.0025
+  required_worst_environment_delta: -0.005
+  required_nonnegative_environment_fraction: 0.6666666666666666
+  ci_noninferiority_margin: 0.005
+
+pool_shift:
+  required_delta_vs_pool_global: -0.005
+  pools:
+    pool4_original:
+      - InternVL3_5-2B
+      - LFM2.5-VL-1.6B
+      - Qwen3.5-2B
+      - gemma-4-E2B-it
+    pool4_qwen_vl_swap:
+      - InternVL3_5-2B
+      - LFM2.5-VL-1.6B
+      - Qwen3-VL-2B-Instruct
+      - gemma-4-E2B-it
+  methods: &pool_methods
+    - global_best_posthoc
+    - majority_answer_support
+    - mcb_dcs_structured
+    - knop_output_profile
+    - more_style_structured
+    - smoothie_local_spectral
+    - oprs_robust_output_profile
+    - fcrg_full
+    - fcrg_h1_only
+    - fcrg_h1_h2
+    - fcrg_symmetric
+    - fcrg_column_mean_only
+
+stochastic_method_patterns:
+  - learned_mlp_selector
+  - fcrg_random_edges
+  - fcrg_degree_relabel
+
+required_baseline_methods: &required_baselines
+  - global_best_posthoc
+  - fast_global_best_single_call
+  - majority_answer_support
+  - ola_metadata
+  - lca_support_class
+  - mcb_dcs_structured
+  - knop_output_profile
+  - knora_u_output_profile
+  - knora_e_output_profile
+  - meta_des_logistic
+  - more_style_structured
+  - more_style_minilm
+  - smoothie_global_spectral
+  - smoothie_local_spectral
+  - smoothie_global_minilm
+  - smoothie_local_minilm
+  - uncertainty_only
+  - agreement_x_global
+  - local_knn_only
+  - global_local_rank
+  - learned_logistic_selector
+  - learned_mlp_selector
+  - oprs_robust_output_profile
+
+required_fcrg_methods: &required_fcrg
+  - fcrg_full
+  - fcrg_g_only
+  - fcrg_a_only
+  - fcrg_l_only
+  - fcrg_column_mean_only
+  - fcrg_h1_only
+  - fcrg_h2_only
+  - fcrg_h1_h2
+  - fcrg_no_failure_conditioning
+  - fcrg_no_a_no_u
+  - fcrg_no_l
+  - fcrg_no_g
+  - fcrg_no_self
+  - fcrg_row_normalized
+  - fcrg_column_normalized
+  - fcrg_row_softmax
+  - fcrg_symmetric
+  - fcrg_random_edges
+  - fcrg_degree_relabel
+  - fcrg_depth_1
+  - fcrg_depth_2
+  - fcrg_depth_3
+  - fcrg_depth_4
+  - fcrg_depth_5
+  - fcrg_learned_weights
+
+experts: &multimodal_experts
+  - InternVL3_5-2B
+  - Kimi-VL-A3B-Instruct
+  - LFM2.5-VL-1.6B
+  - MiniCPM-V-4.6
+  - Qwen3-VL-2B-Instruct
+  - Qwen3-VL-2B-Thinking
+  - Qwen3.5-2B
+  - SmolVLM2-2.2B-Base
+  - SmolVLM2-2.2B-Instruct
+  - gemma-4-E2B-it
+  - glm-edge-v-2b
+
+source:
+  dataset: mmmu_pro
+  split: validation_id
+  modality: multimodal
+  cache_path: outputs/multimodal_babyvision_models/mmmu_pro/standard_10_options/validation_id

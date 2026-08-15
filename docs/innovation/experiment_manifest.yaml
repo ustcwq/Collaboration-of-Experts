@@ -1,0 +1,143 @@
+version: 2
+generated_at: "2026-08-15"
+status: audited_development_plus_consumed_secondary_test
+locked_final_test:
+  dataset: musr
+  split: test
+  role: experimenter_blind_secondary_test_consumed_once
+  experiment_id: locked_musr_paper_v1_20260815
+  decision: primary_superiority_not_confirmed
+  output_root: outputs/bench_coe/innovation/locked_musr/paper_v1_20260815
+notes:
+  - "All target datasets below except MuSR have influenced development and are not blind tests."
+  - "MuSR was sealed before label access, consumed once on 2026-08-15, and cannot be reused as a fresh locked test."
+  - "Experimenter-level blinding does not establish absence from model pretraining corpora."
+  - "Sample counts come from cached files or existing run manifests."
+datasets:
+  - dataset: mmmu_pro
+    split: validation_id
+    modality: multimodal
+    source_or_target: source
+    development_or_locked_test: development_source
+    expert_pool: multimodal_common_11
+    cache_path: outputs/multimodal_babyvision_models/mmmu_pro/standard_10_options/validation_id
+    label_path: embedded_answer_and_is_correct_in_prediction_cache
+    judge: exact_match_dataset_evaluator
+    answer_type: multiple_choice_A_to_J
+    sample_count: 577
+  - dataset: mmmu_pro
+    split: test_id
+    modality: multimodal
+    source_or_target: target
+    development_or_locked_test: development_ood
+    expert_pool: multimodal_common_11
+    cache_path: outputs/multimodal_babyvision_models/mmmu_pro/standard_10_options/test_id
+    label_path: embedded_answer_and_is_correct_in_prediction_cache
+    judge: exact_match_dataset_evaluator
+    answer_type: multiple_choice_A_to_J
+    sample_count: 1153
+  - dataset: mathvista
+    split: testmini
+    modality: multimodal
+    source_or_target: target
+    development_or_locked_test: development_ood
+    expert_pool: multimodal_common_11
+    cache_path: outputs/multimodal_babyvision_models/mathvista/testmini
+    label_path: embedded_answer_and_is_correct_in_prediction_cache
+    judge: dataset_specific_exact_numeric_or_choice
+    answer_type: mixed_numeric_and_multiple_choice
+    sample_count: 1000
+  - dataset: cmmmu
+    split: val
+    modality: multimodal
+    source_or_target: target
+    development_or_locked_test: development_ood
+    expert_pool: multimodal_common_11
+    cache_path: outputs/multimodal_babyvision_models/cmmmu/val
+    label_path: embedded_answer_and_is_correct_in_prediction_cache
+    judge: exact_match_dataset_evaluator
+    answer_type: mixed_choice
+    sample_count: 900
+  - dataset: mmlu_pro
+    split: validation
+    modality: language
+    source_or_target: source
+    development_or_locked_test: development_source
+    expert_pool: language_fixed_14
+    cache_path: outputs/bench_coe/mmlu_pro_validation_single_models
+    label_path: embedded_in_subject_json
+    judge: exact_match
+    answer_type: multiple_choice
+    sample_count: 70
+  - dataset: bbh
+    split: cached_eval
+    modality: language
+    source_or_target: both
+    development_or_locked_test: development_ood
+    expert_pool: language_fixed_14
+    cache_path: outputs/model_benchmarks/official_code_local_models/bbh
+    label_path: embedded_in_predictions_jsonl
+    judge: benchmark_specific_exact_match
+    answer_type: mixed_text
+    sample_count: 6511
+  - dataset: gpqa
+    split: cached_eval
+    modality: language
+    source_or_target: both
+    development_or_locked_test: development_ood
+    expert_pool: language_fixed_14
+    cache_path: outputs/model_benchmarks/official_code_local_models/gpqa
+    label_path: embedded_in_predictions_jsonl
+    judge: exact_match
+    answer_type: multiple_choice
+    sample_count: 4768
+  - dataset: mmstar_text_only
+    split: test
+    modality: language
+    source_or_target: both
+    development_or_locked_test: development_ood
+    expert_pool: language_fixed_14
+    cache_path: outputs/model_benchmarks/official_code_local_models/mmstar_text_only
+    label_path: embedded_in_predictions_jsonl
+    judge: exact_match
+    answer_type: multiple_choice
+    sample_count: 1500
+  - dataset: musr
+    split: test
+    modality: language
+    source_or_target: target
+    development_or_locked_test: consumed_locked_secondary_test
+    expert_pool: language_fixed_14
+    cache_path: outputs/bench_coe/innovation/locked_musr/paper_v1_20260815/target_observables
+    label_path: evaluator_only_raw_csv_after_prediction_seal
+    judge: exact_multiple_choice_match
+    answer_type: multiple_choice_2_to_5_options
+    sample_count: 756
+expert_pools:
+  multimodal_common_11:
+    - InternVL3_5-2B
+    - Kimi-VL-A3B-Instruct
+    - LFM2.5-VL-1.6B
+    - MiniCPM-V-4.6
+    - Qwen3-VL-2B-Instruct
+    - Qwen3-VL-2B-Thinking
+    - Qwen3.5-2B
+    - SmolVLM2-2.2B-Base
+    - SmolVLM2-2.2B-Instruct
+    - gemma-4-E2B-it
+    - glm-edge-v-2b
+  language_fixed_14:
+    - Baichuan2-7B-Chat
+    - General-Reasoner-7B-preview
+    - Llama-3.1-8B-Instruct
+    - MAmmoTH2-8B-Plus
+    - Ministral-8B-Instruct-2410
+    - Nemotron-H-8B-Reasoning-128K
+    - Qwen2.5-7B-Instruct
+    - Yi-1.5-9B-Chat
+    - Yi-9B
+    - aya-expanse-8b
+    - gemma-2-9b-it
+    - glm-4-9b-chat
+    - granite-3.3-8b-instruct
+    - internlm3-8b-instruct

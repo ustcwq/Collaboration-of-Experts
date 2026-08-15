@@ -1,0 +1,66 @@
+base_seed: 20260808
+seeds: [20260808, 20260809, 20260810, 20260811]
+physical_gpus: [4, 5, 6, 7]
+base_physical_gpus: [0, 1, 2, 3]
+family_map: configs/innovation/expert_families.yaml
+dataset_registry: docs/innovation/experiment_manifest.yaml
+dataset_registry_sha256: 3cc1bf93adc5e7d0b7277447659317184377739d592c68b831dd5768b8cedb79
+test_receipt: outputs/bench_coe/innovation/receipts/remediation_conservative_gpu4_7_v1_tests.json
+output_root: outputs/bench_coe/innovation/cpi_conservative/source_loso_gpu4_7_v1_20260809
+base_run_root: outputs/bench_coe/innovation/cpi_selector/source_loso_remediation_v5_20260808
+inner_groups: 2
+threshold_grid: [0.0, 0.025, 0.05, 0.075, 0.10, 0.15, 0.20, 0.30, 0.50, 1.01]
+calibration_min_worst_delta: -0.005
+calibration_min_micro_delta: 0.0
+calibration_worst_weight: 0.5
+required_macro_delta: 0.0025
+required_worst_delta: -0.005
+required_nonnegative_fraction: 0.6666666666666666
+epochs: 24
+batch_size: 128
+learning_rate: 0.003
+hidden_dim: 48
+fingerprint_rank: 4
+bootstrap_samples: 1000
+expected_source_questions: 577
+expected_source_environments: 30
+experts:
+  - InternVL3_5-2B
+  - Kimi-VL-A3B-Instruct
+  - LFM2.5-VL-1.6B
+  - MiniCPM-V-4.6
+  - Qwen3-VL-2B-Instruct
+  - Qwen3-VL-2B-Thinking
+  - Qwen3.5-2B
+  - SmolVLM2-2.2B-Base
+  - SmolVLM2-2.2B-Instruct
+  - gemma-4-E2B-it
+  - glm-edge-v-2b
+replacement_experts:
+  - Qwen3-VL-4B-Instruct
+  - Qwen3.5-9B
+known_swaps:
+  Qwen3-VL-2B-Instruct: Qwen3-VL-4B-Instruct
+  Qwen3.5-2B: Qwen3.5-9B
+source:
+  dataset: mmmu_pro
+  split: validation_id
+  modality: multimodal
+  cache_path: outputs/multimodal_babyvision_models/mmmu_pro/standard_10_options/validation_id
+base_artifacts:
+  20260808:
+    prediction_manifest_sha256: bcbcfc18afdb00b76ef4b070a93303972fe1878fbf98134a97aa1fffce6b2991
+    source_best_single_sha256: 75030d27e09d1654372ed0e01ff477d285eccaa306504b7d4839cf0bd1162744
+    deepsets_full_sha256: 2b9cdc2156f9cc918f343500da48440e077cdc92b0dc54a9faab2d877d1d355b
+  20260809:
+    prediction_manifest_sha256: 22baf44c8c9ccee9450e2f0f1acd9b8812acfe14e917fbbd5e52654d7a076352
+    source_best_single_sha256: 75030d27e09d1654372ed0e01ff477d285eccaa306504b7d4839cf0bd1162744
+    deepsets_full_sha256: 9ada420a2dd64a48cdadc22862553a0a8e1581d38891ef1a0208e70f016b255a
+  20260810:
+    prediction_manifest_sha256: 028a605e3e60ff0d5c56e24e757dc1f7326ae63341ddf6d2eed4827cc63c33fc
+    source_best_single_sha256: 75030d27e09d1654372ed0e01ff477d285eccaa306504b7d4839cf0bd1162744
+    deepsets_full_sha256: 171bf2548c51c1b27b4fdf17c9bb69a7a7528cba72968bb5d285eace3897bcfb
+  20260811:
+    prediction_manifest_sha256: 869ef8443301febee0f104dc9641c6710544450bc75892f077df6225acfdbd16
+    source_best_single_sha256: 75030d27e09d1654372ed0e01ff477d285eccaa306504b7d4839cf0bd1162744
+    deepsets_full_sha256: 5f8134b8c6eca362ef5f130e81b40e593f96bed5fcf9ccae412b05e8c09b657a

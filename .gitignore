@@ -1,0 +1,42 @@
+# Bench-CoE ModelScope assets are intentionally external/large.
+benchcoe_assets/
+.benchcoe_assets/
+modelscope_cache/
+*.part
+*.incomplete
+
+# Runtime artifacts, model weights, downloaded data, and local caches.
+outputs/
+data/
+ZIP/
+models
+models_v
+local_models/
+3.yaml
+sixtynet.yaml
+.codex_tmp/
+.codex_deps/
+.ruff_cache/
+.agents/
+.codex/
+__pycache__/
+*.py[cod]
+*.log
+
+# External benchmark/framework checkouts are reproducible dependencies, not this source tree.
+BabyVision/
+BIG-Bench-Hard/
+CMMMU/
+GAOKAO-Bench-2010-2022/
+GAOKAO-Bench-2023-2024/
+GAOKAO-MM/
+LlamaFactory/
+MMLU-Pro/
+MMMU/
+MMStar/
+MathVista/
+Qwen3-VL/
+gpqa/
+transformers/
+vllm/
+github_review_package/

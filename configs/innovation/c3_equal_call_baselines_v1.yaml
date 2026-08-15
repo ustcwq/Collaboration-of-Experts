@@ -1,0 +1,50 @@
+protocol_version: 1
+protocol_name: c3_equal_call_single_model_controls_v1
+status: development_only_no_confirmatory_claim
+seed: 20260815
+
+c3_config: configs/innovation/c3_development_v3.yaml
+c3_config_sha256: 5286b5324a6e78e3e6213dbe5e9290b645a1f0c219491d1705cb85e8b6cf13b2
+run_root: outputs/bench_coe/innovation/cross_examined_certificates/dev_v3_20260815
+physical_gpus: [0, 1, 2, 3]
+
+# This is the complete generator/checker pool frozen before C3 v3 generation. No v3
+# label, certificate, check, or accuracy result was used to select a control model.
+models:
+  - Qwen2.5-7B-Instruct
+  - General-Reasoner-7B-preview
+  - Yi-1.5-9B-Chat
+  - Nemotron-H-8B-Reasoning-128K
+
+calls_per_question: 30
+methods:
+  self_consistency:
+    samples: 30
+  self_revision:
+    initial_samples: 15
+    revisions_per_initial: 1
+
+generation:
+  backend: vllm
+  temperature: 0.7
+  top_p: 0.95
+  max_model_len: 4096
+  max_new_tokens: 384
+  guided_regex: true
+  batch_size: 8
+  gpu_memory_utilization: 0.82
+  dtype: auto
+  trust_remote_code: true
+
+acceptance:
+  minimum_final_parse_rate: 0.90
+  minimum_valid_final_sample_fraction_per_question: 0.90
+  maximum_prompt_truncations: 0
+
+data_policy:
+  generation_reads_labels: false
+  model_pool_equals_prefrozen_c3_generator_checker_pool: true
+  development_accuracy_used_for_model_selection: false
+  certificate_or_check_outputs_used_for_model_selection: false
+  target_labels_control_generation_or_aggregation: false
+  consumed_locked_tests_excluded: [musr_test]

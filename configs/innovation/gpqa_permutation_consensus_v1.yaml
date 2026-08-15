@@ -1,0 +1,50 @@
+protocol_version: 1
+protocol_name: gpqa_cross_permutation_semantic_consensus_v1
+protocol_seed: 20260814
+scope: development_ood_posthoc_permutation_consensus
+family_map: configs/innovation/expert_families.yaml
+dataset_registry: docs/innovation/experiment_manifest.yaml
+dataset_registry_sha256: 3cc1bf93adc5e7d0b7277447659317184377739d592c68b831dd5768b8cedb79
+source_config: configs/innovation/prior_art_overlap_language_ood_gpu0_3_v2.yaml
+portfolio_config: configs/innovation/strict_positive_dataset_portfolios_v1.yaml
+v2_run_root: outputs/bench_coe/innovation/large_gain_portfolio/v2_20260814
+test_receipt: outputs/bench_coe/innovation/receipts/gpqa_permutation_consensus_v1_tests.json
+output_root: outputs/bench_coe/innovation/gpqa_permutation_consensus/v1_20260814
+bootstrap_samples: 10000
+experts:
+  - Baichuan2-7B-Chat
+  - General-Reasoner-7B-preview
+  - Llama-3.1-8B-Instruct
+  - MAmmoTH2-8B-Plus
+  - Ministral-8B-Instruct-2410
+  - Nemotron-H-8B-Reasoning-128K
+  - Qwen2.5-7B-Instruct
+  - Yi-1.5-9B-Chat
+  - Yi-9B
+  - aya-expanse-8b
+  - gemma-2-9b-it
+  - glm-4-9b-chat
+  - granite-3.3-8b-instruct
+  - internlm3-8b-instruct
+targets:
+  - name: gpqa_cached_eval
+    dataset: gpqa
+    split: cached_eval
+    modality: language
+    label_cache_path: outputs/model_benchmarks/official_code_local_models/gpqa
+    observable_cache_path: outputs/bench_coe/innovation/sanitized_targets/permutation_v1/gpqa_common14
+    observable_manifest_sha256: d9e0b4ac157c0c200a5275abb1743937cbadca0ef6c728dd69b6f2f0ab4cd6fc
+    expected_questions: 4768
+candidate_grid:
+  vote_modes: [raw, expert_normalized, expert_majority]
+  source_powers: [0.0, 2.0, 4.0]
+  consistency_powers: [0.0, 1.0]
+  family_balance: [false]
+  gates:
+    - [0.0, 0.0]
+    - [0.35, 0.0]
+    - [0.45, 0.05]
+    - [0.55, 0.10]
+acceptance:
+  minimum_delta_vs_fcrg: 0.02
+  v2_accuracy: 0.3403942953020134

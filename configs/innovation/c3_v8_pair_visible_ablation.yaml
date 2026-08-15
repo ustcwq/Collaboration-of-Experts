@@ -1,0 +1,100 @@
+protocol_version: 8
+protocol_name: c3_v8_pair_visible_commitment_ablation
+status: development_mechanism_ablation_no_confirmatory_claim
+seed: 20260815
+output_root: outputs/bench_coe/innovation/cross_examined_certificates/dev_v8_20260815/mechanism_ablations/pair_visible_with_precommitment
+models_dir: models
+physical_gpus: [0, 1, 2, 3]
+
+mechanism_ablation:
+  name: pair_visible_with_precommitment
+  base_config_path: configs/innovation/c3_development_v8.yaml
+  base_config_sha256: c00f14239f28a3e4ad795a92d7de90d0312a466be8add7448640a6e84eabcc19
+  changed_factor: sibling_trace_and_pair_existence_revealed
+  unchanged_call_budget: true
+  target_labels_control_stopping_or_selection: false
+
+experts:
+  - Baichuan2-7B-Chat
+  - General-Reasoner-7B-preview
+  - Llama-3.1-8B-Instruct
+  - MAmmoTH2-8B-Plus
+  - Ministral-8B-Instruct-2410
+  - Nemotron-H-8B-Reasoning-128K
+  - Qwen2.5-7B-Instruct
+  - Yi-1.5-9B-Chat
+  - Yi-9B
+  - aya-expanse-8b
+  - gemma-2-9b-it
+  - glm-4-9b-chat
+  - granite-3.3-8b-instruct
+  - internlm3-8b-instruct
+
+certificate_models:
+  - Qwen2.5-7B-Instruct
+  - General-Reasoner-7B-preview
+  - Yi-1.5-9B-Chat
+  - Nemotron-H-8B-Reasoning-128K
+checker_models:
+  - Qwen2.5-7B-Instruct
+  - General-Reasoner-7B-preview
+  - Yi-1.5-9B-Chat
+  - Nemotron-H-8B-Reasoning-128K
+
+datasets:
+  - name: mmlu_pro_validation
+    dataset: mmlu_pro
+    split: validation
+    role: development
+    expected_questions: 70
+    cache_path: outputs/bench_coe/mmlu_pro_validation_single_models
+  - name: gpqa_diamond_epoch0
+    dataset: gpqa
+    split: diamond_epoch0
+    role: development
+    expected_questions: 198
+    label_cache_path: outputs/model_benchmarks/official_code_local_models/gpqa
+    observable_cache_path: outputs/bench_coe/innovation/sanitized_targets/prior_art_v2/gpqa_common14
+    reference_model: Qwen2.5-7B-Instruct
+    config: diamond
+    epoch: 0
+
+certificate_generation:
+  backend: vllm
+  prompt_version: committed_counterfactual_permutation_v6
+  parser_version: committed_counterfactual_challenge_fields_v6
+  seed: 20260815
+  temperature: 0.0
+  top_p: 1.0
+  max_model_len: 4096
+  max_new_tokens: 512
+  guided_regex: true
+  guided_seal_is_complete_claim_or_complete_abstention: true
+  batch_size: 32
+  gpu_memory_utilization: 0.82
+  dtype: auto
+  trust_remote_code: true
+  bounded_smoke_balances_presented_trace_slots: true
+
+check_generation:
+  backend: vllm
+  prompt_version: commitment_conditioned_pair_audit_v8_ablation
+  parser_version: pair_proof_obligation_audit_fields_v8_ablation
+  seed: 20260815
+  temperature: 0.0
+  top_p: 1.0
+  max_model_len: 4096
+  max_new_tokens: 256
+  guided_regex: true
+  batch_size: 32
+  gpu_memory_utilization: 0.82
+  dtype: auto
+  trust_remote_code: true
+
+smoke_acceptance:
+  minimum_reconstruction_parse_rate: 0.90
+  minimum_position_invariant_pair_rate: 0.50
+  minimum_sealed_triple_audit_rate: 0.20
+  minimum_paired_sealed_triple_match_rate: 0.10
+  maximum_prompt_truncations: 0
+

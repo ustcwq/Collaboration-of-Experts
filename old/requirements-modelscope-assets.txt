@@ -1,0 +1,4 @@
+modelscope>=1.29,<2
+PyYAML>=6,<7
+Pillow>=11,<12
+
