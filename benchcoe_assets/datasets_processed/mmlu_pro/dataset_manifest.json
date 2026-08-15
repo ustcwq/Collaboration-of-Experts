@@ -1,0 +1,19 @@
+{
+  "dataset": "mmlu_pro",
+  "dataset_revision": "resolved",
+  "generated_at": "2026-07-31T06:38:32.454826+00:00",
+  "qa_status": "pass",
+  "raw_files": [
+    {
+      "bytes": 42857,
+      "path": "/home/sm5/ys/FCS/MMLU-Pro/data/validation-00000-of-00001.parquet",
+      "sha256": "139423c23722e480c807ac4a191409a710cfce4eba744c1d641cf88e730e2078"
+    }
+  ],
+  "sample_count": 8,
+  "sample_schema": "benchcoe_unified_v1",
+  "samples_sha256": "39ba0fb4393087bced2a41fa31cfb2813c1c28fbfa7e1e6c6005e7c4b6830a5e",
+  "schema_version": "benchcoe_dataset_manifest_v1",
+  "selection": "sha256(dataset, split, native_id-or-question) ascending",
+  "smoke_subset": true
+}

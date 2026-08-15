@@ -1,0 +1,68 @@
+{
+  "resources": [
+    {
+      "absolute_path": "/home/sm5/ys/FCS/BIG-Bench-Hard",
+      "adopted_at": "2026-07-31T06:23:49.300314+00:00",
+      "kind": "dataset",
+      "logical_name": "bbh",
+      "provenance": "preexisting_repository_asset",
+      "provenance_verified_modelscope": false,
+      "status": "adopted_existing"
+    },
+    {
+      "absolute_path": "/home/sm5/ys/FCS/CMMMU",
+      "adopted_at": "2026-07-31T06:23:49.300463+00:00",
+      "kind": "dataset",
+      "logical_name": "cmmmu",
+      "provenance": "preexisting_repository_asset",
+      "provenance_verified_modelscope": false,
+      "status": "adopted_existing"
+    },
+    {
+      "absolute_path": "/home/sm5/ys/FCS/gpqa",
+      "adopted_at": "2026-07-31T06:23:49.300351+00:00",
+      "kind": "dataset",
+      "logical_name": "gpqa",
+      "provenance": "preexisting_repository_asset",
+      "provenance_verified_modelscope": false,
+      "status": "adopted_existing"
+    },
+    {
+      "absolute_path": "/home/sm5/ys/FCS/MathVista",
+      "adopted_at": "2026-07-31T06:23:49.300494+00:00",
+      "kind": "dataset",
+      "logical_name": "mathvista",
+      "provenance": "preexisting_repository_asset",
+      "provenance_verified_modelscope": false,
+      "status": "adopted_existing"
+    },
+    {
+      "absolute_path": "/home/sm5/ys/FCS/MMLU-Pro",
+      "adopted_at": "2026-07-31T06:23:49.300265+00:00",
+      "kind": "dataset",
+      "logical_name": "mmlu_pro",
+      "provenance": "preexisting_repository_asset",
+      "provenance_verified_modelscope": false,
+      "status": "adopted_existing"
+    },
+    {
+      "absolute_path": "/home/sm5/ys/FCS/data/MMMU_Pro",
+      "adopted_at": "2026-07-31T06:23:49.300388+00:00",
+      "kind": "dataset",
+      "logical_name": "mmmu_pro",
+      "provenance": "preexisting_repository_asset",
+      "provenance_verified_modelscope": false,
+      "status": "adopted_existing"
+    },
+    {
+      "absolute_path": "/home/sm5/ys/FCS/MMStar",
+      "adopted_at": "2026-07-31T06:23:49.300431+00:00",
+      "kind": "dataset",
+      "logical_name": "mmstar",
+      "provenance": "preexisting_repository_asset",
+      "provenance_verified_modelscope": false,
+      "status": "adopted_existing"
+    }
+  ],
+  "schema_version": "benchcoe_local_adoptions_v1"
+}

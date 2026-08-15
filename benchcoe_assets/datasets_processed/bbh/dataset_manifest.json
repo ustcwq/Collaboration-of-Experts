@@ -1,0 +1,149 @@
+{
+  "dataset": "bbh",
+  "dataset_revision": "resolved",
+  "generated_at": "2026-07-31T06:38:37.217819+00:00",
+  "qa_status": "pass",
+  "raw_files": [
+    {
+      "bytes": 17172,
+      "path": "/home/sm5/ys/FCS/BIG-Bench-Hard/bbh/boolean_expressions.json",
+      "sha256": "ea6c754ec005e2d3f2d085d349a740f593b5764f32ea4638ffed4cfc0061b12a"
+    },
+    {
+      "bytes": 202943,
+      "path": "/home/sm5/ys/FCS/BIG-Bench-Hard/bbh/causal_judgement.json",
+      "sha256": "6e8bca44dd402008ed41c07a3d0a1d5e7b03db7001a7e002fcdf4c60985ea081"
+    },
+    {
+      "bytes": 61760,
+      "path": "/home/sm5/ys/FCS/BIG-Bench-Hard/bbh/date_understanding.json",
+      "sha256": "0148d4ac5fca05b2f82373e5fef7208e15363b9c6079493034d77b3dab496bf5"
+    },
+    {
+      "bytes": 85255,
+      "path": "/home/sm5/ys/FCS/BIG-Bench-Hard/bbh/disambiguation_qa.json",
+      "sha256": "cf06df9ebf911b883671cb1b35d3fbd1a1c306b19b9e9a012407e596c85fe8c6"
+    },
+    {
+      "bytes": 43814,
+      "path": "/home/sm5/ys/FCS/BIG-Bench-Hard/bbh/dyck_languages.json",
+      "sha256": "3f9badedf15c2be1ce53d94fdf016299bb30ba231ef087ab9f51a7ed6d0bdc25"
+    },
+    {
+      "bytes": 145562,
+      "path": "/home/sm5/ys/FCS/BIG-Bench-Hard/bbh/formal_fallacies.json",
+      "sha256": "4c1adb664821157faade1d4153685403afcc02648f3c180a608a18f17f589629"
+    },
+    {
+      "bytes": 77242,
+      "path": "/home/sm5/ys/FCS/BIG-Bench-Hard/bbh/geometric_shapes.json",
+      "sha256": "07be68a124420caa2ebc0b2c858ad79fc55c5c8806170e496e1e17ebfb11f31c"
+    },
+    {
+      "bytes": 44706,
+      "path": "/home/sm5/ys/FCS/BIG-Bench-Hard/bbh/hyperbaton.json",
+      "sha256": "b6d7f55c75f5d02f2987a4f3123802dfa093872089a56a334144aae8a7264fdc"
+    },
+    {
+      "bytes": 155477,
+      "path": "/home/sm5/ys/FCS/BIG-Bench-Hard/bbh/logical_deduction_five_objects.json",
+      "sha256": "d2df31394b903b7f0e085d42a69572a092987856eac076799017d70ef266fa8f"
+    },
+    {
+      "bytes": 198404,
+      "path": "/home/sm5/ys/FCS/BIG-Bench-Hard/bbh/logical_deduction_seven_objects.json",
+      "sha256": "2896c7e3482eea318dd37bcc370d24ec3cc91e8374c1784287b5dbd38a529e33"
+    },
+    {
+      "bytes": 112213,
+      "path": "/home/sm5/ys/FCS/BIG-Bench-Hard/bbh/logical_deduction_three_objects.json",
+      "sha256": "e590fae72e3a6041fbd23bd8ff6b74baf44ca563f6ba40a041c55e7b867c1681"
+    },
+    {
+      "bytes": 57684,
+      "path": "/home/sm5/ys/FCS/BIG-Bench-Hard/bbh/movie_recommendation.json",
+      "sha256": "a8b53a87ee21a865b7248e694f388a9b8f7cf6b839b11d44796a2dd3fc088983"
+    },
+    {
+      "bytes": 18325,
+      "path": "/home/sm5/ys/FCS/BIG-Bench-Hard/bbh/multistep_arithmetic_two.json",
+      "sha256": "c9d5a6433c9b78256422a15c78463949c8bec8d85607aa28b52d7234ad4a8595"
+    },
+    {
+      "bytes": 55163,
+      "path": "/home/sm5/ys/FCS/BIG-Bench-Hard/bbh/navigate.json",
+      "sha256": "b7944dfd3c81da5c4815bd75b00d6fa3c64140823498e78ed496f4c3d36f7f0d"
+    },
+    {
+      "bytes": 35890,
+      "path": "/home/sm5/ys/FCS/BIG-Bench-Hard/bbh/object_counting.json",
+      "sha256": "8acef14dbbdd40d2326ef7755750b6b5fe919fef06276af1bab3f1c297f022ff"
+    },
+    {
+      "bytes": 74516,
+      "path": "/home/sm5/ys/FCS/BIG-Bench-Hard/bbh/penguins_in_a_table.json",
+      "sha256": "bb87ee449698eee51215e025a453b1bcb2f5e6589c2063b2c79e68b8f0655228"
+    },
+    {
+      "bytes": 98694,
+      "path": "/home/sm5/ys/FCS/BIG-Bench-Hard/bbh/reasoning_about_colored_objects.json",
+      "sha256": "0a8850cf95166020fce7a78244026ceedd7ea839302471512b4f8744e85a6a49"
+    },
+    {
+      "bytes": 53178,
+      "path": "/home/sm5/ys/FCS/BIG-Bench-Hard/bbh/ruin_names.json",
+      "sha256": "b6f723aef2bafdd4c7bfc3c7e0329c7e8a8279391a609969c8ed76c9319f5f7f"
+    },
+    {
+      "bytes": 286443,
+      "path": "/home/sm5/ys/FCS/BIG-Bench-Hard/bbh/salient_translation_error_detection.json",
+      "sha256": "becf3eb8dd53c821a555ecd5c1334ecd93eb25f980e63be963c518e7138de5da"
+    },
+    {
+      "bytes": 42646,
+      "path": "/home/sm5/ys/FCS/BIG-Bench-Hard/bbh/snarks.json",
+      "sha256": "54a0661fe2de06167645a4965e6bcf963c4ba307e76262a7c750998b0e3d0d0e"
+    },
+    {
+      "bytes": 28617,
+      "path": "/home/sm5/ys/FCS/BIG-Bench-Hard/bbh/sports_understanding.json",
+      "sha256": "63ca262858f6176864515cd8cf53cdaa40839ebecc155b726d77930855d167bf"
+    },
+    {
+      "bytes": 148176,
+      "path": "/home/sm5/ys/FCS/BIG-Bench-Hard/bbh/temporal_sequences.json",
+      "sha256": "92a1189faaa84aacc4c405aaa13f13f48c2992eb884772eedb622505252baef5"
+    },
+    {
+      "bytes": 169722,
+      "path": "/home/sm5/ys/FCS/BIG-Bench-Hard/bbh/tracking_shuffled_objects_five_objects.json",
+      "sha256": "2063a46a4fb484236ed4310523606543a3e1dd4a4dc34eda65d407910ece25a5"
+    },
+    {
+      "bytes": 214906,
+      "path": "/home/sm5/ys/FCS/BIG-Bench-Hard/bbh/tracking_shuffled_objects_seven_objects.json",
+      "sha256": "b59fd05b850c37cf57cb514ae1e6975c00b1638ade2291722056b2af3c54084d"
+    },
+    {
+      "bytes": 128736,
+      "path": "/home/sm5/ys/FCS/BIG-Bench-Hard/bbh/tracking_shuffled_objects_three_objects.json",
+      "sha256": "546cc7bf10c6a01a6a4c17ae28a4966485f21f29fd5d111f37858ec78e354f6b"
+    },
+    {
+      "bytes": 52964,
+      "path": "/home/sm5/ys/FCS/BIG-Bench-Hard/bbh/web_of_lies.json",
+      "sha256": "3e60323f8514a107fdb4edf35f8832a9171c5a09c0eaa47823559de905e8ab8b"
+    },
+    {
+      "bytes": 66300,
+      "path": "/home/sm5/ys/FCS/BIG-Bench-Hard/bbh/word_sorting.json",
+      "sha256": "2a6132d2c99f00d0d2eb1113ac6b4a918bd969d863c48749210d969713db8d43"
+    }
+  ],
+  "sample_count": 8,
+  "sample_schema": "benchcoe_unified_v1",
+  "samples_sha256": "ed1259d98935a7e6a5d8dc2d93b99484724f3c9d53d348bc3fa7e4342a0fa8b8",
+  "schema_version": "benchcoe_dataset_manifest_v1",
+  "selection": "sha256(dataset, split, native_id-or-question) ascending",
+  "smoke_subset": true
+}

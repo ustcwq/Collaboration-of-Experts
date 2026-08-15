@@ -1,0 +1,12 @@
+{
+  "asset_root": "/home/sm5/ys/FCS/benchcoe_assets",
+  "download_allowed": true,
+  "filesystem_free_bytes": 281286389760,
+  "filesystem_total_bytes": 16908647632896,
+  "generated_at": "2026-07-31T06:50:24.602912+00:00",
+  "known_download_bytes": 2641287755,
+  "required_free_bytes_with_margin": 3301609693,
+  "skipped_existing_resources": [],
+  "space_sufficient_for_known_sizes": true,
+  "unknown_size_resources": []
+}

@@ -1,0 +1,30 @@
+{
+  "category_counts": {
+    "": 8
+  },
+  "choice_count_distribution": {
+    "0": 8
+  },
+  "duplicate_choice_rows": 0,
+  "duplicate_content_hashes": 0,
+  "duplicate_sample_ids": 0,
+  "generated_at": "2026-07-31T06:38:37.215607+00:00",
+  "image_count": 0,
+  "image_errors": 0,
+  "invalid_answer_ids": [],
+  "language_counts": {
+    "": 8
+  },
+  "missing_answer": 0,
+  "missing_question": 0,
+  "open_answer_count": 0,
+  "random_guess_baselines": {},
+  "role_counts": {
+    "target_locked_test": 8
+  },
+  "sample_count": 8,
+  "split_counts": {
+    "test": 8
+  },
+  "status": "pass"
+}

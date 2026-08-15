@@ -1,0 +1,67 @@
+
+ _   .-')                _ .-') _     ('-.             .-')                              _ (`-.    ('-.
+( '.( OO )_             ( (  OO) )  _(  OO)           ( OO ).                           ( (OO  ) _(  OO)
+ ,--.   ,--.).-'),-----. \     .'_ (,------.,--.     (_)---\_)   .-----.  .-'),-----.  _.`     \(,------.
+ |   `.'   |( OO'  .-.  ',`'--..._) |  .---'|  |.-') /    _ |   '  .--./ ( OO'  .-.  '(__...--'' |  .---'
+ |         |/   |  | |  ||  |  \  ' |  |    |  | OO )\  :` `.   |  |('-. /   |  | |  | |  /  | | |  |
+ |  |'.'|  |\_) |  |\|  ||  |   ' |(|  '--. |  |`-' | '..`''.) /_) |OO  )\_) |  |\|  | |  |_.' |(|  '--.
+ |  |   |  |  \ |  | |  ||  |   / : |  .--'(|  '---.'.-._)   \ ||  |`-'|   \ |  | |  | |  .___.' |  .--'
+ |  |   |  |   `'  '-'  '|  '--'  / |  `---.|      | \       /(_'  '--'\    `'  '-'  ' |  |      |  `---.
+ `--'   `--'     `-----' `-------'  `------'`------'  `-----'    `-----'      `-----'  `--'      `------'
+
+Downloading Model from https://modelscope.cn to directory: /home/sm5/ys/FCS/models/DeepSeek-R1-Distill-Qwen-1.5B
+Processing 1 items:   0%|          | 0.00/1.00 [00:00<?, ?it/s]
+Downloading [tokenizer.json]:   0%|          | 0.00/6.71M [00:00<?, ?B/s][A
+Downloading [tokenizer.json]: 10.0MB [00:01, 6.51MB/s]                   [A
+Downloading [tokenizer.json]: 15.0MB [00:05, 2.34MB/s][A
+Downloading [tokenizer.json]: 20.0MB [00:10, 1.70MB/s][A
+Downloading [tokenizer.json]: 25.0MB [00:20, 921kB/s] [A
+Downloading [tokenizer.json]: 30.0MB [00:38, 548kB/s][AProcessing 1 items: 100%|██████████| 1.00/1.00 [00:38<00:00, 38.6s/it]Processing 1 items: 100%|██████████| 1.00/1.00 [00:38<00:00, 38.6s/it]
+Traceback (most recent call last):
+  File "/home/sm5/anaconda3/envs/Factory/lib/python3.12/site-packages/modelscope/hub/file_download.py", line 571, in http_get_model_file
+    r.raise_for_status()
+  File "/home/sm5/anaconda3/envs/Factory/lib/python3.12/site-packages/requests/models.py", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://modelscope.cn/api/v1/models/deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B/repo?Revision=master&FilePath=tokenizer.json
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/sm5/anaconda3/envs/Factory/bin/modelscope", line 7, in <module>
+    sys.exit(run_cmd())
+             ^^^^^^^^^
+  File "/home/sm5/anaconda3/envs/Factory/lib/python3.12/site-packages/modelscope/cli/cli.py", line 49, in run_cmd
+    cmd.execute()
+  File "/home/sm5/anaconda3/envs/Factory/lib/python3.12/site-packages/modelscope/cli/download.py", line 151, in execute
+    snapshot_download(
+  File "/home/sm5/anaconda3/envs/Factory/lib/python3.12/site-packages/modelscope/hub/snapshot_download.py", line 132, in snapshot_download
+    return _snapshot_download(
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/sm5/anaconda3/envs/Factory/lib/python3.12/site-packages/modelscope/hub/snapshot_download.py", line 335, in _snapshot_download
+    _download_file_lists(
+  File "/home/sm5/anaconda3/envs/Factory/lib/python3.12/site-packages/modelscope/hub/snapshot_download.py", line 586, in _download_file_lists
+    _download_single_file(filtered_repo_files)
+  File "/home/sm5/anaconda3/envs/Factory/lib/python3.12/site-packages/modelscope/utils/thread_utils.py", line 66, in wrapper
+    results.append(future.result())
+                   ^^^^^^^^^^^^^^^
+  File "/home/sm5/anaconda3/envs/Factory/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/sm5/anaconda3/envs/Factory/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/home/sm5/anaconda3/envs/Factory/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sm5/anaconda3/envs/Factory/lib/python3.12/site-packages/modelscope/hub/snapshot_download.py", line 572, in _download_single_file
+    download_file(
+  File "/home/sm5/anaconda3/envs/Factory/lib/python3.12/site-packages/modelscope/hub/file_download.py", line 697, in download_file
+    file_digest = http_get_model_file(
+                  ^^^^^^^^^^^^^^^^^^^^
+  File "/home/sm5/anaconda3/envs/Factory/lib/python3.12/site-packages/modelscope/hub/file_download.py", line 584, in http_get_model_file
+    retry = retry.increment('GET', url, error=e)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sm5/anaconda3/envs/Factory/lib/python3.12/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: None: Max retries exceeded with url: https://modelscope.cn/api/v1/models/deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B/repo?Revision=master&FilePath=tokenizer.json (Caused by HTTPError('404 Client Error: Not Found for url: https://modelscope.cn/api/v1/models/deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B/repo?Revision=master&FilePath=tokenizer.json'))
+Downloading [tokenizer.json]: 30.0MB [00:38, 812kB/s]

@@ -1,0 +1,21 @@
+# Licenses
+
+- `qwen3_1_7b`: apache-2.0
+- `internvl35_2b`: apache-2.0
+- `mmlu_pro`: mit
+- `arc_challenge`: Apache License 2.0
+- `logiqa2`: unresolved
+- `bbh`: Apache License 2.0
+- `gpqa`: Apache License 2.0
+- `livebench`: mit
+- `musr`: Apache License 2.0
+- `mmmu_pro`: Apache License 2.0
+- `scienceqa`: Apache License 2.0
+- `ai2d`: Apache License 2.0
+- `chartqa`: Apache License 2.0
+- `mmstar`: Apache License 2.0
+- `cmmmu`: Apache License 2.0
+- `mathvista`: Apache License 2.0
+- `blink`: apache-2.0
+- `naturalbench`: unresolved
+- `cvbench`: apache-2.0

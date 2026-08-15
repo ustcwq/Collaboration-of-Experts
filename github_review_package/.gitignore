@@ -1,0 +1,50 @@
+# Large local assets and benchmark artifacts
+models/
+models_v/
+data/
+Data/
+outputs/
+cache/
+caches/
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.ckpt
+*.gguf
+*.jsonl
+*.pkl
+*.pickle
+*.parquet
+*.arrow
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+
+# Local environment and logs
+.env
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.log
+nohup.out
+tmp/
+temp/
+*.tmp
+*.bak
+.DS_Store
+
+# Smoke tests and scratch files
+smoke/
+smoke_*/
+*smoke*
+scratch/
+scratch_*/
+*scratch*
+
+# Paper/privacy-sensitive files
+*.pdf
+*.docx
+*.pptx

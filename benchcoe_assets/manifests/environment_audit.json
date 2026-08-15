@@ -1,0 +1,19 @@
+{
+  "asset_root": "/home/sm5/ys/FCS/benchcoe_assets",
+  "generated_at": "2026-07-31T06:44:42.596393+00:00",
+  "git_branch": null,
+  "git_revision": null,
+  "git_status": [],
+  "modelscope_cache": "/home/sm5/ys/FCS/modelscope_cache",
+  "platform": "Linux-6.8.0-87-generic-x86_64-with-glibc2.35",
+  "python": "3.12.11 | packaged by Anaconda, Inc. | (main, Jun  5 2025, 13:09:17) [GCC 11.2.0]",
+  "versions": {
+    "PIL": "11.3.0",
+    "evalscope": "missing:ModuleNotFoundError",
+    "modelscope": "1.29.2",
+    "torch": "2.8.0+cu128",
+    "transformers": "5.10.0.dev0",
+    "vllm": "installed",
+    "yaml": "6.0.2"
+  }
+}

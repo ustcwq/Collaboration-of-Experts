@@ -1,0 +1,54 @@
+{
+  "generated_at": "2026-07-31T07:20:34.453609+00:00",
+  "profile": "smoke",
+  "resources": [
+    {
+      "local_path": "/home/sm5/ys/FCS/data/arc_challenge",
+      "logical_name": "arc_challenge",
+      "retries": 0,
+      "status": "downloaded"
+    },
+    {
+      "local_path": "/home/sm5/ys/FCS/data/livebench",
+      "logical_name": "livebench",
+      "retries": 0,
+      "status": "downloaded"
+    },
+    {
+      "local_path": "/home/sm5/ys/FCS/data/musr",
+      "logical_name": "musr",
+      "retries": 0,
+      "status": "downloaded"
+    },
+    {
+      "local_path": "/home/sm5/ys/FCS/data/scienceqa",
+      "logical_name": "scienceqa",
+      "retries": 0,
+      "status": "downloaded"
+    },
+    {
+      "local_path": "/home/sm5/ys/FCS/data/ai2d",
+      "logical_name": "ai2d",
+      "retries": 0,
+      "status": "downloaded"
+    },
+    {
+      "local_path": "/home/sm5/ys/FCS/data/chartqa",
+      "logical_name": "chartqa",
+      "retries": 0,
+      "status": "downloaded"
+    },
+    {
+      "local_path": "/home/sm5/ys/FCS/data/blink",
+      "logical_name": "blink",
+      "retries": 0,
+      "status": "downloaded"
+    },
+    {
+      "local_path": "/home/sm5/ys/FCS/data/cvbench",
+      "logical_name": "cvbench",
+      "retries": 0,
+      "status": "downloaded"
+    }
+  ]
+}

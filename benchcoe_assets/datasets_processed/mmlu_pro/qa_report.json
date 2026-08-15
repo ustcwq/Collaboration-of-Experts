@@ -1,0 +1,38 @@
+{
+  "category_counts": {
+    "biology": 2,
+    "business": 1,
+    "history": 1,
+    "math": 1,
+    "other": 1,
+    "physics": 1,
+    "psychology": 1
+  },
+  "choice_count_distribution": {
+    "10": 8
+  },
+  "duplicate_choice_rows": 3,
+  "duplicate_content_hashes": 0,
+  "duplicate_sample_ids": 0,
+  "generated_at": "2026-07-31T06:38:32.452212+00:00",
+  "image_count": 0,
+  "image_errors": 0,
+  "invalid_answer_ids": [],
+  "language_counts": {
+    "": 8
+  },
+  "missing_answer": 0,
+  "missing_question": 0,
+  "open_answer_count": 0,
+  "random_guess_baselines": {
+    "10": 0.1
+  },
+  "role_counts": {
+    "source_calibration": 8
+  },
+  "sample_count": 8,
+  "split_counts": {
+    "validation": 8
+  },
+  "status": "pass"
+}

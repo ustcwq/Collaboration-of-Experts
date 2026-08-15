@@ -1,0 +1,44 @@
+{
+  "dataset": "cmmmu",
+  "dataset_revision": "resolved",
+  "generated_at": "2026-07-31T06:39:03.089098+00:00",
+  "qa_status": "pass",
+  "raw_files": [
+    {
+      "bytes": 62262,
+      "path": "/home/sm5/ys/FCS/CMMMU/cmmmu-data-val/art_and_design/art_and_design.jsonl",
+      "sha256": "f111913292644c057ada13b86235a4f3bbd753f65dff349f5dbc219b33057782"
+    },
+    {
+      "bytes": 97704,
+      "path": "/home/sm5/ys/FCS/CMMMU/cmmmu-data-val/business/business.jsonl",
+      "sha256": "9d0e9afe33af993932fb67a20205e549b52baf705febc6e40cb0fef880c3a2b6"
+    },
+    {
+      "bytes": 111020,
+      "path": "/home/sm5/ys/FCS/CMMMU/cmmmu-data-val/health_and_medicine/health_and_medicine.jsonl",
+      "sha256": "173adf6a825f9553b549db3fa4d96b7525246f263c0918c94d4e9bc49cdee8f7"
+    },
+    {
+      "bytes": 56696,
+      "path": "/home/sm5/ys/FCS/CMMMU/cmmmu-data-val/humanities_and_social_sciences/humanities_and_social_sciences.jsonl",
+      "sha256": "aa1b4288e759d00166a4de4f23f0ee18cb9ab33cbbe173211260f0829833a2f2"
+    },
+    {
+      "bytes": 150214,
+      "path": "/home/sm5/ys/FCS/CMMMU/cmmmu-data-val/science/science.jsonl",
+      "sha256": "32574ad804aee0ce42feaacaf6fa32557297aabd60ec46ba8f04e60e9e4b35cb"
+    },
+    {
+      "bytes": 176484,
+      "path": "/home/sm5/ys/FCS/CMMMU/cmmmu-data-val/technology_and_engineering/technology_and_engineering.jsonl",
+      "sha256": "737236b670f0c513da74fbced0c53405faaa93ad8249eef35f44b503aca99371"
+    }
+  ],
+  "sample_count": 8,
+  "sample_schema": "benchcoe_unified_v1",
+  "samples_sha256": "a78c86d8d087307687863a65ff315c71ad262b4e254057ecad7d96a350c3eec0",
+  "schema_version": "benchcoe_dataset_manifest_v1",
+  "selection": "sha256(dataset, split, native_id-or-question) ascending",
+  "smoke_subset": true
+}
